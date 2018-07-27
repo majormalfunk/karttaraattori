@@ -18,7 +18,7 @@ Primin algoritmin aikavaativuus on O(|E|log|V|).
 *A\**-algoritmin kuvaus löytyy mm. Wikipediasta: [A* search algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm)
 A*-alogritmin aikavaativuus on O((|E|+|V|)log|V|), jos toteutuksessa käytetään minimikekoa vielä käsittelemättömien solmujen tallettamiseen.
 
-Toteutan Primin algoritmin ja A\* algoritmin seuraten Helsingin Yliopiston Tietorakenteet ja algoritmit -kurssin kevään 2018 materiaalissa olevia näiden algoritmien pseudokoodeja.
+Toteutan Primin algoritmin ja A\* algoritmin seuraten Helsingin Yliopiston Tietorakenteet ja algoritmit -kurssin kevään 2018 materiaalissa olevia näiden algoritmien pseudokoodeja. Näissä Primin algroritmi hyödyntää tietorakenteina virittävää puuta, aputaulukoita sekä minimikekoa. A* algoritmissä käytetään verkkoa, aputaulukoita ja minimikekoa.
 
 ## Syötteet 
 
