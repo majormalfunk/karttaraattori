@@ -2,7 +2,7 @@
 
 ## Taustaa
 
-Toteutan Karttageneraattorin noudattaen artikkelissa **Algorithms For Procedural Dungeon Generation** (*Nathan Hilliard*, *John Salis* ja *Hala ELAarg*) kuvattua Span*-algoritmia. Artikkelissa on verrattu kirjoittajien kehittämien Span*-algoritmin ja Growth-algoritmin ominaisuuksia, lopputulosta ja suorituskykyä. Artikkeli löytyy mm. ACM:n sähköisestä kirjastosta julkaisussa *October 2017 Journal of Computing Sciences in Colleges: Volume 33 Issue 1, October 2017*.
+Toteutan karttageneraattorin noudattaen artikkelissa **Algorithms For Procedural Dungeon Generation** (*Nathan Hilliard*, *John Salis* ja *Hala ELAarg*) kuvattua Span*-algoritmia. Artikkelissa on verrattu kirjoittajien kehittämien Span*-algoritmin ja Growth-algoritmin ominaisuuksia, lopputulosta ja suorituskykyä. Artikkeli löytyy mm. ACM:n sähköisestä kirjastosta julkaisussa *October 2017 Journal of Computing Sciences in Colleges: Volume 33 Issue 1, October 2017*.
 
 Valitsin Span* algoritmin julkaisun johtopäätösten perusteella, koska tekijöiden havaintojen perusteella Span* ei tee umpikujia päinvastoin kuin Growth-algoritmi. Lisäksi Span* vaikuttaisi luovan visuaalisesti viimeistellymmän näköisiä karttoja.
 
@@ -17,6 +17,8 @@ Primin algoritmin aikavaativuus on O(|E|log|V|).
 
 *A\**-algoritmin kuvaus löytyy mm. Wikipediasta: [A* search algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm)
 A*-alogritmin aikavaativuus on O((|E|+|V|)log|V|), jos toteutuksessa käytetään minimikekoa vielä käsittelemättömien solmujen tallettamiseen.
+
+Toteutan Primin algoritmin ja A\* algoritmin seuraten Helsingin Yliopiston Tietorakenteet ja algoritmit -kurssin kevään 2018 materiaalissa olevia näiden algoritmien pseudokoodeja.
 
 ## Syötteet 
 
