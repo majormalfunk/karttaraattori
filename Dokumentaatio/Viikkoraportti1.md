@@ -4,7 +4,7 @@ Ensimmäisellä viikolla osallistuin aloitusluentoon. Aloitusluennon jälkeen ke
 
 Tutkittuani molempia mahdollisia aiheita kevyesti, päädyin valitsemaan karttageneraattorin tai luolastogeneraattorin, miten sitä nyt sitten haluaa kutsua. Valintaani pohjautui siihen, että karttageneraattori vaikutti aiheelta, joka voisi olla innostavampi. Lisäksi salausalgorimitmien toteuttaminen olisi mielestäni vaatinut osallani jossain määrin laajempaa matematiikan tuntemusta.
 
-Selasin erilaisia sivustoja Ja päädyin valitsemaan toteutukseni sen vuoksi, että siinä käytetään kahtaa eri tunnettua algoritmia, joita on molempia käsitelty aiemmalla kurssilla.
+Selasin erilaisia sivustoja ja päädyin valitsemaan toteutukseni sen vuoksi, että siinä käytetään kahtaa eri tunnettua algoritmia, joita on molempia käsitelty aiemmalla kurssilla.
 
 Ohjelmasta on valmiina vasta NetBeans projekti, joka kääntyy, mutta ei tee vielä muuta kuin käynnistää sovellusikkunan.
 
