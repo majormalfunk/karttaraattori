@@ -6,25 +6,25 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import karttaraattori.ui.StartScene;
 
 
 public class Karttaraattori extends Application {
 
     private Stage stage;
-    private Scene scene;
+    private StartScene scene;
     private Group root;
 
 
     @Override
     public void start(Stage stage) throws Exception {
         
-        this.stage = stage;
-        this.scene = new Scene(new Group());
-        this.root = (Group) scene.getRoot();
-        
+        Group root = new Group();
+        StartScene scene = new StartScene(root);
         stage.setTitle("Karttaraattori");
         stage.setScene(scene);
         stage.show();
+
     }
 
     /**
