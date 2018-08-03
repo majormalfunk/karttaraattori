@@ -31,4 +31,4 @@ Toteutan ohjelman JavaFX:llä, joten siinä on graafinen käyttöliittymä. Koko
 
 ## Pakkauskaavio (alustava)
 
-![alt text](karttaraattori/Dokumentaatio/Pakkauskaavio.png "Pakkauskaavio")
+![alt text](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Pakkauskaavio.png "Pakkauskaavio")
