@@ -24,7 +24,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <mainClass>karttaraattori.Karttaraattori</mainClass>
+        <mainClass>mazeomatic.Mazeomatic</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -132,9 +132,9 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.0</version>
                 <configuration>
-                    <!-- <excludes>
-                            <exclude>karttaraattori/ui/*</exclude>
-                         </excludes> -->
+                    <excludes>
+                        <exclude>mazeomatic/ui/*</exclude>
+                    </excludes> -->
                 </configuration>
                 <executions>
                     <execution>
@@ -155,7 +155,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>karttaraattori.Karttaraattori</mainClass>
+                            <mainClass>mazeomatic.Mazeomatic</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
