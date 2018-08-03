@@ -29,3 +29,6 @@ Ohjelmalle annetaan syötteenä ainakin luotavan kartan koon (pituus \* leveys) 
 Toteutan ohjelman JavaFX:llä, joten siinä on graafinen käyttöliittymä. Koko kartta ei näy kerralla ruudulla, mikäli kartan koko on suurempi kuin sovellusikkunan koko. Tällöin käyttäjä pystyy liikuttamaan karttaa tietokoneen hiirellä tai näppäimistöllä.
 
 
+## Pakkauskaavio (alustava)
+
+![alt text](https://github.com/majormalfunk/karttaraattori/Dokumentaatio/Pakkauskaavio.png "Pakkauskaavio")
