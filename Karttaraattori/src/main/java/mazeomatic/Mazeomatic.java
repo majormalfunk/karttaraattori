@@ -4,7 +4,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mazeomatic.logic.Maze;
@@ -23,7 +22,8 @@ public class Mazeomatic extends Application {
     public int rooms;
     public Maze maze;
     
-    public static final int MIN_SIZE = 4;
+    public static final int MIN_SIZE = 8;
+    public static final int MIN_ROOMS = 2;
     public static final double BLOCK_SIZE = 20;
 
     @Override
@@ -59,6 +59,8 @@ public class Mazeomatic extends Application {
                                 parametersSet = true;
                                 System.out.println("Parameters set correctly!");
                                 makeMaze();
+                                placeRoomsInMaze();
+                                fillMaze();
                                 showMaze();
                                 stop();
 
@@ -81,6 +83,20 @@ public class Mazeomatic extends Application {
      */
     private void makeMaze() {
         maze = new Maze(mazeWidth, mazeHeight, rooms);
+    }
+    
+    /**
+     * Calls the function that places the rooms in the maze
+     */
+    private void placeRoomsInMaze() {
+        maze.placeRooms();
+    }
+    
+    /**
+     * Calls the maze filling function
+     */
+    private void fillMaze() {
+        maze.fillMaze();
     }
     
     /**

@@ -5,24 +5,24 @@
  */
 package mazeomatic.ui;
 
-import javafx.scene.shape.Rectangle;
-import mazeomatic.Mazeomatic;
+import javafx.scene.paint.Color;
 
 /**
- * Maze block class to be inherited
- * 
+ *
  * @author jaakkovilenius
  */
-public abstract class MazeBlock extends Rectangle {
-
-    public MazeBlock() {
+public class MazeBlockFloor extends MazeBlock {
+    
+    public MazeBlockFloor() {
         super();
-
-        setWidth(Mazeomatic.BLOCK_SIZE);
-        setHeight(Mazeomatic.BLOCK_SIZE);
         
+        this.setArcWidth(5);
+        this.setArcHeight(5);
+        this.setFill(Color.GRAY);
+        this.setStroke(Color.DARKGRAY);
+        this.setStrokeWidth(3.0);
+
         
     }
-    
     
 }

@@ -18,8 +18,8 @@ public class MazeBlockWall extends MazeBlock {
         super();
         
         this.setFill(Color.BROWN);
-        this.setStroke(Color.DARKRED);
-        this.setStrokeWidth(3.0);
+        //this.setStroke(Color.DARKRED);
+        //this.setStrokeWidth(3.0);
         
     }
     

@@ -87,7 +87,7 @@ public class StartScene extends Scene {
         GridPane.setConstraints(labelHeightHint, 2, 1);
         grid.getChildren().add(labelHeightHint);
 
-        final Label labelRoomsHint = new Label("(>= 2)");
+        final Label labelRoomsHint = new Label("(>= " + Mazeomatic.MIN_ROOMS + ")");
         labelRoomsHint.setTextFill(Color.GRAY);
         GridPane.setConstraints(labelRoomsHint, 2, 2);
         grid.getChildren().add(labelRoomsHint);
@@ -111,6 +111,7 @@ public class StartScene extends Scene {
                     try {
                         mazeomatic.mazeWidth = parseInput(valueWidth);
                         mazeomatic.mazeHeight = parseInput(valueHeight);
+                        mazeomatic.rooms = parseInput(valueRooms);
                     } catch (Exception ex) {
                         
                     }
@@ -140,7 +141,7 @@ public class StartScene extends Scene {
     
     boolean roomsValid(TextField input) {
         try {
-            return parseInput(input) >= 2;
+            return parseInput(input) >= Mazeomatic.MIN_ROOMS;
         } catch (Exception ex) {
             return false;
         }
