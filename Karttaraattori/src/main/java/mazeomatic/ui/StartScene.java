@@ -26,7 +26,7 @@ import mazeomatic.Mazeomatic;
  * @author jaakkovilenius
  */
 public class StartScene extends Scene {
-    
+
     public static final String BACKGROUND_STYLE
             = "-fx-background-color: #cc3333; "
             + "-fx-background-radius: 0; "
@@ -41,7 +41,7 @@ public class StartScene extends Scene {
         super(root);
 
         final Mazeomatic mazeomatic = mzmtic;
-        
+
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(5);
@@ -113,7 +113,7 @@ public class StartScene extends Scene {
                         mazeomatic.mazeHeight = parseInput(valueHeight);
                         mazeomatic.rooms = parseInput(valueRooms);
                     } catch (Exception ex) {
-                        
+
                     }
                 } else {
                     labelStatus.setText("Syötä validit arvot");
@@ -138,7 +138,7 @@ public class StartScene extends Scene {
             return false;
         }
     }
-    
+
     boolean roomsValid(TextField input) {
         try {
             return parseInput(input) >= Mazeomatic.MIN_ROOMS;
@@ -146,7 +146,7 @@ public class StartScene extends Scene {
             return false;
         }
     }
-    
+
     int parseInput(TextField input) throws Exception {
         return Integer.parseInt(input.getText());
     }

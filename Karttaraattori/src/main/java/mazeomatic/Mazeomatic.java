@@ -4,7 +4,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mazeomatic.logic.Maze;
 import mazeomatic.ui.MazeScene;
@@ -14,14 +13,14 @@ public class Mazeomatic extends Application {
 
     private Group root;
     private Stage stage;
-    
+
     public boolean stopLoop;
     public boolean parametersSet;
     public int mazeWidth;
     public int mazeHeight;
     public int rooms;
     public Maze maze;
-    
+
     public static final int MIN_SIZE = 8;
     public static final int MIN_ROOMS = 2;
     public static final double BLOCK_SIZE = 20;
@@ -61,6 +60,7 @@ public class Mazeomatic extends Application {
                                 makeMaze();
                                 placeRoomsInMaze();
                                 fillMaze();
+                                buildGraph();
                                 showMaze();
                                 stop();
 
@@ -77,28 +77,35 @@ public class Mazeomatic extends Application {
         }
 
     }
-    
+
     /**
      * Calls the constructor of the Maze class
      */
     private void makeMaze() {
         maze = new Maze(mazeWidth, mazeHeight, rooms);
     }
-    
+
     /**
      * Calls the function that places the rooms in the maze
      */
     private void placeRoomsInMaze() {
         maze.placeRooms();
     }
-    
+
     /**
      * Calls the maze filling function
      */
     private void fillMaze() {
         maze.fillMaze();
     }
-    
+
+    /**
+     * Calls the graph building function
+     */
+    private void buildGraph() {
+        maze.buildGraph();
+    }
+
     /**
      * Calls the constructor of the visual representation of the maze
      */
@@ -107,7 +114,6 @@ public class Mazeomatic extends Application {
         stage.setScene(mazeScene);
         stage.show();
 
-        
     }
 
     /**
@@ -121,6 +127,5 @@ public class Mazeomatic extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
 
 }

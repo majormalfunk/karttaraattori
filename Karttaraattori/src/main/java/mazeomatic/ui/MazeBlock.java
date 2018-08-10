@@ -10,7 +10,7 @@ import mazeomatic.Mazeomatic;
 
 /**
  * Maze block class to be inherited
- * 
+ *
  * @author jaakkovilenius
  */
 public abstract class MazeBlock extends Rectangle {
@@ -20,9 +20,7 @@ public abstract class MazeBlock extends Rectangle {
 
         setWidth(Mazeomatic.BLOCK_SIZE);
         setHeight(Mazeomatic.BLOCK_SIZE);
-        
-        
+
     }
-    
-    
+
 }
