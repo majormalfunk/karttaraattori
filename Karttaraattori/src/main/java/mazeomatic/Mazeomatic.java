@@ -61,6 +61,7 @@ public class Mazeomatic extends Application {
                                 placeRoomsInMaze();
                                 fillMaze();
                                 buildGraph();
+                                runPrim();
                                 showMaze();
                                 stop();
 
@@ -106,6 +107,13 @@ public class Mazeomatic extends Application {
         maze.buildGraph();
     }
 
+    /**
+     * Calls the function to run Prim's algorithm
+     */
+    private void runPrim() {
+        maze.runPrim(0);
+    }
+    
     /**
      * Calls the constructor of the visual representation of the maze
      */

@@ -99,19 +99,44 @@ public class Maze {
         for (int i = 0; i < rooms; i++) {
             ArrayList<Edge> proxyList = new ArrayList<>();
             graph[i] = proxyList;
-            for (int j = i + 1; j < rooms; j++) {
-                int weight = Math.abs(roomNodes[i].x - roomNodes[j].x) + Math.abs(roomNodes[i].y - roomNodes[j].y);
-                Edge edge = new Edge(i, j, weight);
-                proxyList.add(edge);
+            for (int j = 0; j < rooms; j++) {
+                if (i != j) {
+                    // Don't include the room itself in the proximity list
+                    int weight = Math.abs(roomNodes[i].x - roomNodes[j].x) + Math.abs(roomNodes[i].y - roomNodes[j].y);
+                    Edge edge = new Edge(i, j, weight);
+                    proxyList.add(edge);
+                }
             }
         }
+        System.out.println("Proximity list:");
+        for (int g = 0; g < graph.length; g++) {
+            System.out.print(g + " : ");
+            for (Edge e : graph[g]) {
+                System.out.print(e.a + ">" + e.b + "=" + e.weight + " ");
+            }
+            System.out.print("\n");
+        }
 
-        prim = new Prim(graph, roomNodes, 0);
+    }
+    
+    /**
+     * This function runs the Prim's algorithm. 
+     * 
+     * @param start The node from which to start the tree building. Must be
+     * less than the count of rooms
+     */
+    public void runPrim(int start) {
+        prim = new Prim(graph, roomNodes, start);
         spanner = prim.buildSpanningTree();
 
+        System.out.println("Prim's result:");
+        System.out.println("==============");
+        int total = 0;
         for (Edge e : spanner) {
             System.out.println("E: " + e.a + " -> " + e.b + " : " + e.weight);
+            total += e.weight;
         }
+        System.out.println("Total weight: " + total);
 
     }
 

@@ -77,7 +77,9 @@ public class MazeTest {
     }
 
     @Test
-    public void testPrim() {
+    public void testPrim1() {
+        // This is just a basic test to find out that Prim builds a predefined
+        // spanning tree correctly.
         maze = new Maze(WIDTH, HEIGHT, 5);
         Node room0 = new Node(2, 2, 0, 0);
         maze.roomNodes[0] = room0;
@@ -91,6 +93,7 @@ public class MazeTest {
         maze.roomNodes[4] = room4;
         maze.fillMaze();
         maze.buildGraph();
+        maze.runPrim(0);
 
         String[] solution = new String[4];
         solution[0] = "0->2:6";
@@ -103,6 +106,33 @@ public class MazeTest {
             assertTrue((edge.a + "->" + edge.b + ":" + edge.weight).equals(solution[e]));
         }
 
+    }
+    
+    @Test
+    public void testPrim2() {
+        // Here we test to see that the total weight of a the spanning tree
+        // based on a random graph is always the same with the same graph
+        // no matter from which vertice we start building the tree.
+        int firstTotal = 0;
+        maze = new Maze(WIDTH, HEIGHT, ROOMS);
+        maze.placeRooms();
+        maze.fillMaze();
+        maze.buildGraph();
+        maze.runPrim(0);
+        //        int total = 0;
+        for (Edge e : maze.spanner) {
+            System.out.println("E: " + e.a + " -> " + e.b + " : " + e.weight);
+            firstTotal += e.weight;
+        }
+        for (int r = 1; r < ROOMS; r++) {
+            int total = 0;
+            maze.runPrim(r);
+            for (Edge e : maze.spanner) {
+                total += e.weight;
+            }
+            assertEquals(firstTotal, total);
+        }
+       
     }
 
 }
