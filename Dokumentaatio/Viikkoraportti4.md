@@ -18,3 +18,9 @@ Kuvassa on merkittynä taaskin viivoilla Primin tuottama virittävä puu. Käyt�
 
 Omien tietorakenteiden suhteen olen aivan alkutekijöissä. Olen luonut tyhjät luokat korvaamaan ArrayListin, PriorityQueuen ja HashSetin
 sekä Randomin.
+
+Olen listannut lyhyesti testausdokumenttiin suunnitelmia testauksen kannalta.
+
+Toteutusdokumenttia en ehtinyt aloittamaan tähän viikon 4 dead lineen mennessä.
+
+Aikaa olen kuluneella viikolla käyttänyt noin 12 tuntia.
