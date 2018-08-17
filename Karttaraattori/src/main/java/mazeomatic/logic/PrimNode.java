@@ -6,11 +6,11 @@
 package mazeomatic.logic;
 
 /**
- * The Node class. It will be used to represent maze elements in proximity lists
+ * The PrimNode class. It will be used to represent maze elements in proximity lists
  *
  * @author jaakkovilenius
  */
-public class Node implements Comparable<Node> {
+public class PrimNode implements Comparable<PrimNode> {
 
     public int x;
     public int y;
@@ -25,7 +25,7 @@ public class Node implements Comparable<Node> {
      * @param y The y coordinate
      * @param type The maze block type
      */
-    public Node(int x, int y, int type, int id) {
+    public PrimNode(int x, int y, int type, int id) {
         this.x = x;
         this.y = y;
         this.type = type;
@@ -33,7 +33,7 @@ public class Node implements Comparable<Node> {
     }
 
     @Override
-    public int compareTo(Node o2) {
+    public int compareTo(PrimNode o2) {
         if (this.distance < o2.distance) {
             return -1;
         } else if (this.distance > o2.distance) {
@@ -44,7 +44,7 @@ public class Node implements Comparable<Node> {
 
     @Override
     public boolean equals(Object o) {
-        Node n = (Node) o;
+        PrimNode n = (PrimNode) o;
         //System.out.println("Testing equality");
         if (n.id == this.id) {
             return true;

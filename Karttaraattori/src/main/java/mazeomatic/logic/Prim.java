@@ -16,12 +16,12 @@ import java.util.PriorityQueue; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATIO
 public class Prim {
 
     ArrayList<Edge>[] graph;
-    Node[] nodes;
+    PrimNode[] nodes;
     int start;
 
     int distance[];
     int parent[];
-    PriorityQueue<Node> heap;
+    PriorityQueue<PrimNode> heap;
 
     /**
      * Constructor for the class
@@ -32,9 +32,9 @@ public class Prim {
      * tree
      *
      * @see mazeomatic.logic.Edge
-     * @see mazeomatic.logic.Node
+     * @see mazeomatic.logic.PrimNode
      */
-    public Prim(ArrayList<Edge>[] graph, Node[] nodes, int start) {
+    public Prim(ArrayList<Edge>[] graph, PrimNode[] nodes, int start) {
 
         this.graph = graph;
         this.nodes = nodes;
@@ -68,7 +68,7 @@ public class Prim {
         }
 
         while (!heap.isEmpty()) {
-            Node u = heap.poll();
+            PrimNode u = heap.poll();
             //System.out.println("Polled " + u.id);
             //System.out.println("Heap size = " + heap.size());
             if (parent[u.id] != -1) {
@@ -80,7 +80,7 @@ public class Prim {
                 //System.out.println("Heap contains " + heap.contains(nodes[e.b]));
                 //System.out.println("Weight " + e.a + " -> " + e.b + " : " + e.weight);
                 if (heap.contains(nodes[e.b]) && e.weight < distance[e.b]) {
-                    //System.out.println("Node " + nodes[e.b] + " in heap");
+                    //System.out.println("PrimNode " + nodes[e.b] + " in heap");
                     parent[e.b] = u.id;
                     distance[e.b] = e.weight;
                     heap.remove(nodes[e.b]);

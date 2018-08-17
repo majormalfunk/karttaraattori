@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import mazeomatic.Mazeomatic;
 import mazeomatic.logic.Edge;
-import mazeomatic.logic.Node;
+import mazeomatic.logic.PrimNode;
 
 /**
  * This scene shows the constructed maze
@@ -61,10 +61,21 @@ public class MazeScene extends Scene {
                 double layoutY = 240.0 - (map[i].length * Mazeomatic.BLOCK_SIZE * 0.5) + (Mazeomatic.BLOCK_SIZE * j);
                 switch (map[i][j]) {
                     case 0:
-                        addBlock(new MazeBlockFloor(), layoutX, layoutY);
+                        addBlock(new MazeBlockWall(), layoutX, layoutY);
                         break;
                     case 1:
+                        addBlock(new MazeBlockRoomCenter(), layoutX, layoutY);
+                        break;
+                    case 2:
+                        addBlock(new MazeBlockRoomOther(), layoutX, layoutY);
+                        break;
+                    case 3:
+                        addBlock(new MazeBlockCorridor(), layoutX, layoutY);
+                        break;
+                    case 4: // Maze edges
                         addBlock(new MazeBlockWall(), layoutX, layoutY);
+                        break;
+                    
                 }
             }
         }
@@ -84,7 +95,7 @@ public class MazeScene extends Scene {
         int width = mzomtic.maze.map.length;
         int height = mzomtic.maze.map[0].length;
         ArrayList<Edge> spanner = mzomtic.maze.spanner;
-        Node[] roomNodes = mzomtic.maze.roomNodes;
+        PrimNode[] roomNodes = mzomtic.maze.roomNodes;
 
         for (Edge e : spanner) {
             double startX = 320.0 - (width * Mazeomatic.BLOCK_SIZE * 0.5) + (Mazeomatic.BLOCK_SIZE * (roomNodes[e.a].x + 0.5));

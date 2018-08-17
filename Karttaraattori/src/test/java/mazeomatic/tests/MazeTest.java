@@ -5,9 +5,11 @@
  */
 package mazeomatic.tests;
 
+import mazeomatic.logic.Astar;
+import mazeomatic.logic.AstarNode;
 import mazeomatic.logic.Maze;
 import mazeomatic.logic.Edge;
-import mazeomatic.logic.Node;
+import mazeomatic.logic.PrimNode;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,46 +33,46 @@ public class MazeTest {
     @Test
     public void testWidthOfMazeArray() {
         maze = new Maze(WIDTH, HEIGHT, ROOMS);
-        maze.placeRooms();
-        maze.fillMaze();
+        maze.chooseRoomLocations();
+        maze.placeRoomsInMaze();
         assertEquals(WIDTH, maze.map.length);
     }
 
     @Test
     public void testHeightOfMazeArray() {
         maze = new Maze(WIDTH, HEIGHT, ROOMS);
-        maze.placeRooms();
-        maze.fillMaze();
+        maze.chooseRoomLocations();
+        maze.placeRoomsInMaze();
         assertEquals(HEIGHT, maze.map[0].length);
     }
 
     @Test
     public void testRoomCountInList() {
         maze = new Maze(WIDTH, HEIGHT, ROOMS);
-        maze.placeRooms();
-        maze.fillMaze();
+        maze.chooseRoomLocations();
+        maze.placeRoomsInMaze();
         assertEquals(ROOMS, maze.roomNodes.length);
     }
 
     @Test
     public void testToFindRoomsInFinalMap() {
         maze = new Maze(WIDTH, HEIGHT, ROOMS);
-        maze.placeRooms();
-        maze.fillMaze();
+        maze.chooseRoomLocations();
+        maze.placeRoomsInMaze();
         for (int t = 0; t < maze.roomNodes.length; t++) {
-            assertTrue(maze.elementAt(maze.roomNodes[t].x, maze.roomNodes[t].y) == 0);
+            assertTrue(maze.elementAt(maze.roomNodes[t].x, maze.roomNodes[t].y) == 1);
         }
     }
 
     @Test
     public void testDistanceOfFirstAndLastRoom() {
         maze = new Maze(WIDTH, HEIGHT, 2);
-        Node room0 = new Node(2, 2, 0, 0);
+        PrimNode room0 = new PrimNode(3, 3, 0, 0);
         maze.roomNodes[0] = room0;
-        Node room1 = new Node(WIDTH - 2, HEIGHT - 2, 0, 1);
+        PrimNode room1 = new PrimNode(WIDTH - 3, HEIGHT - 3, 0, 1);
         maze.roomNodes[1] = room1;
-        maze.fillMaze();
-        int dist = WIDTH - 4 + HEIGHT - 4;
+        maze.placeRoomsInMaze();
+        int dist = WIDTH - 6 + HEIGHT - 6;
         maze.buildGraph();
         Edge edge = maze.graph[0].get(0);
         assertEquals(dist, edge.weight);
@@ -81,17 +83,17 @@ public class MazeTest {
         // This is just a basic test to find out that Prim builds a predefined
         // spanning tree correctly.
         maze = new Maze(WIDTH, HEIGHT, 5);
-        Node room0 = new Node(2, 2, 0, 0);
+        PrimNode room0 = new PrimNode(2, 2, 0, 0);
         maze.roomNodes[0] = room0;
-        Node room1 = new Node(10, 2, 0, 1);
+        PrimNode room1 = new PrimNode(10, 2, 0, 1);
         maze.roomNodes[1] = room1;
-        Node room2 = new Node(2, 8, 0, 2);
+        PrimNode room2 = new PrimNode(2, 8, 0, 2);
         maze.roomNodes[2] = room2;
-        Node room3 = new Node(10, 10, 0, 3);
+        PrimNode room3 = new PrimNode(10, 10, 0, 3);
         maze.roomNodes[3] = room3;
-        Node room4 = new Node(14, 4, 0, 4);
+        PrimNode room4 = new PrimNode(14, 4, 0, 4);
         maze.roomNodes[4] = room4;
-        maze.fillMaze();
+        maze.placeRoomsInMaze();
         maze.buildGraph();
         maze.runPrim(0);
 
@@ -115,8 +117,8 @@ public class MazeTest {
         // no matter from which vertice we start building the tree.
         int firstTotal = 0;
         maze = new Maze(WIDTH, HEIGHT, ROOMS);
-        maze.placeRooms();
-        maze.fillMaze();
+        maze.chooseRoomLocations();
+        maze.placeRoomsInMaze();
         maze.buildGraph();
         maze.runPrim(0);
         //        int total = 0;
@@ -133,6 +135,65 @@ public class MazeTest {
             assertEquals(firstTotal, total);
         }
        
+    }
+    
+    @Test
+    public void testAstar() {
+        
+        int[][] map = new int[WIDTH][HEIGHT];
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                if (i == 0 || j == 0 || i == map.length - 1 || j == map[0].length - 1) {
+                    map[i][j] = 4; // Maze edges
+                } else {
+                    map[i][j] = 0;
+                }
+            }
+        }
+
+        AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                AstarNode node = new AstarNode(i, j, 0); // Passable
+                astarGraph[i][j] = node;
+            }
+        }
+        AstarNode launch = new AstarNode(3, 3, 0);
+        launch.setAsLaunch();
+        astarGraph[3][3] = launch;
+        AstarNode target = new AstarNode(11, 3, 0);
+        target.setAsTarget();
+        astarGraph[11][3] = target;
+        AstarNode obstacle = new AstarNode(7, 3, 1);
+        astarGraph[7][3] = obstacle;
+        
+
+        //System.out.println("A* graph");
+        //logAstarGraph(astarGraph);
+        Astar astar = new Astar(astarGraph, launch, target);
+        AstarNode[][] shortestPath = astar.buildShortestPath();
+
+        int x = target.x;
+        int y = target.y;
+        map[x][y] = 3;
+        int pathLength = 0;
+        while (true) {
+            if (shortestPath[x][y] == null) {
+                break;
+            }
+            if (shortestPath[x][y].x == launch.x && shortestPath[x][y].y == launch.y) {
+                break;
+            }
+            x = shortestPath[x][y].x;
+            y = shortestPath[x][y].y;
+            map[x][y] = 3;
+            //System.out.println("x:" + x + " y:" + y);
+            pathLength++;
+        }
+        assertEquals(7, pathLength);
+        // HERE'S AN ERROR BECAUSE MY A* BUILDS THE PATH SOMETIMES DIAGONALLY. NEED TO FIX IT.
+
+
     }
 
 }

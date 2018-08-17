@@ -23,7 +23,7 @@ public class Mazeomatic extends Application {
 
     public static final int MIN_SIZE = 8;
     public static final int MIN_ROOMS = 2;
-    public static final double BLOCK_SIZE = 20;
+    public static final double BLOCK_SIZE = 10;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -58,10 +58,11 @@ public class Mazeomatic extends Application {
                                 parametersSet = true;
                                 System.out.println("Parameters set correctly!");
                                 makeMaze();
+                                chooseRoomLocations();
                                 placeRoomsInMaze();
-                                fillMaze();
                                 buildGraph();
                                 runPrim();
+                                runAstar();
                                 showMaze();
                                 stop();
 
@@ -89,15 +90,15 @@ public class Mazeomatic extends Application {
     /**
      * Calls the function that places the rooms in the maze
      */
-    private void placeRoomsInMaze() {
-        maze.placeRooms();
+    private void chooseRoomLocations() {
+        maze.chooseRoomLocations();
     }
 
     /**
      * Calls the maze filling function
      */
-    private void fillMaze() {
-        maze.fillMaze();
+    private void placeRoomsInMaze() {
+        maze.placeRoomsInMaze();
     }
 
     /**
@@ -112,6 +113,13 @@ public class Mazeomatic extends Application {
      */
     private void runPrim() {
         maze.runPrim(0);
+    }
+    
+    /**
+     * Calls the function to run A* algorithm
+     */
+    private void runAstar() {
+        maze.runAstar();
     }
     
     /**

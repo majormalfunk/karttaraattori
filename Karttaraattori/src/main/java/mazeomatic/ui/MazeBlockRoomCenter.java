@@ -11,9 +11,9 @@ import javafx.scene.paint.Color;
  *
  * @author jaakkovilenius
  */
-public class MazeBlockFloor extends MazeBlock {
+public class MazeBlockRoomCenter extends MazeBlock {
 
-    public MazeBlockFloor() {
+    public MazeBlockRoomCenter() {
         super();
 
         this.setArcWidth(5);
