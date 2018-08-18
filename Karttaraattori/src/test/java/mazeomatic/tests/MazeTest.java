@@ -11,7 +11,6 @@ import mazeomatic.logic.Maze;
 import mazeomatic.structures.Edge;
 import mazeomatic.structures.MazeRandom;
 import mazeomatic.structures.MazeRandomCongruential;
-import mazeomatic.structures.MazeRandomMock;
 import mazeomatic.structures.PrimNode;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -32,12 +31,12 @@ public class MazeTest {
     final static int ROOMS = 5;
 
     public MazeTest() {
-        
+
     }
 
     @Test
     public void testWidthOfMazeArray() {
-        
+
         MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
@@ -121,7 +120,7 @@ public class MazeTest {
         }
 
     }
-    
+
     @Test
     public void testPrim2() {
         // Here we test to see that the total weight of a the spanning tree
@@ -135,24 +134,26 @@ public class MazeTest {
         maze.buildGraph();
         maze.runPrim(0);
         //        int total = 0;
-        for (Edge e : maze.spanner) {
+        for (int i = 0; i < maze.spanner.size(); i++) {
+            Edge e = maze.spanner.get(i);
             System.out.println("E: " + e.a + " -> " + e.b + " : " + e.weight);
             firstTotal += e.weight;
         }
         for (int r = 1; r < ROOMS; r++) {
             int total = 0;
             maze.runPrim(r);
-            for (Edge e : maze.spanner) {
+            for (int i = 0; i < maze.spanner.size(); i++) {
+                Edge e = maze.spanner.get(i);
                 total += e.weight;
             }
             assertEquals(firstTotal, total);
         }
-       
+
     }
-    
+
     @Test
     public void testAstar() {
-        
+
         int[][] map = new int[WIDTH][HEIGHT];
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
@@ -167,19 +168,18 @@ public class MazeTest {
         AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
-                AstarNode node = new AstarNode(i, j, 0, (i*map.length)+j); // Passable
+                AstarNode node = new AstarNode(i, j, 0, (i * map.length) + j); // Passable
                 astarGraph[i][j] = node;
             }
         }
-        AstarNode launch = new AstarNode(3, 3, 0, (3*map.length)+3);
+        AstarNode launch = new AstarNode(3, 3, 0, (3 * map.length) + 3);
         launch.setAsLaunch();
         astarGraph[3][3] = launch;
-        AstarNode target = new AstarNode(11, 3, 0, (11*map.length)+3);
+        AstarNode target = new AstarNode(11, 3, 0, (11 * map.length) + 3);
         target.setAsTarget();
         astarGraph[11][3] = target;
-        AstarNode obstacle = new AstarNode(7, 3, 1, (7*map.length)+3);
+        AstarNode obstacle = new AstarNode(7, 3, 1, (7 * map.length) + 3);
         astarGraph[7][3] = obstacle;
-        
 
         //System.out.println("A* graph");
         //logAstarGraph(astarGraph);
@@ -204,7 +204,6 @@ public class MazeTest {
             pathLength++;
         }
         assertEquals(7, pathLength);
-        
 
     }
 

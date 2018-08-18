@@ -7,10 +7,9 @@ import javafx.scene.Group;
 import javafx.stage.Stage;
 import mazeomatic.logic.Maze;
 import mazeomatic.structures.MazeRandom;
+import mazeomatic.structures.MazeRandomCongruential;
 import mazeomatic.ui.MazeScene;
 import mazeomatic.ui.StartScene;
-import mazeomatic.structures.MazeRandomCongruential;
-import mazeomatic.structures.MazeRandomMock;
 
 public class Mazeomatic extends Application {
 
@@ -39,7 +38,6 @@ public class Mazeomatic extends Application {
         rooms = 0;
         
         random = new MazeRandomCongruential();
-        //random = new MazeRandomMock();
 
         root = new Group();
         this.stage = stage;
@@ -133,7 +131,7 @@ public class Mazeomatic extends Application {
      * Calls the constructor of the visual representation of the maze
      */
     private void showMaze() {
-        MazeScene mazeScene = new MazeScene(root, this);
+        MazeScene mazeScene = new MazeScene(root, this, mazeWidth, mazeHeight);
         stage.setScene(mazeScene);
         stage.show();
 

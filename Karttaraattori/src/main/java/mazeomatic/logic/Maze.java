@@ -9,8 +9,7 @@ import mazeomatic.structures.Edge;
 import mazeomatic.structures.AstarNode;
 import mazeomatic.structures.PrimNode;
 import mazeomatic.structures.MazeRandom;
-
-import java.util.ArrayList; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
+import mazeomatic.structures.MazeArrayList;
 
 /**
  * This class represents the maze. The actual maze data is stored as a 2D int
@@ -27,7 +26,7 @@ public class Maze {
     int rooms; // Number of rooms in the maze
 
     public int[][] map; // The final map
-    public ArrayList<Edge>[] graph; // Graph of the edges as a proximity list
+    public MazeArrayList<Edge>[] graph; // Graph of the edges as a proximity list
 
     private MazeRandom random; // Random number generator
 
@@ -37,7 +36,7 @@ public class Maze {
 
     public Astar astar;
 
-    public ArrayList<Edge> spanner;
+    public MazeArrayList<Edge> spanner;
 
     /**
      * Constructor
@@ -62,7 +61,7 @@ public class Maze {
             }
         }
 
-        graph = new ArrayList[rooms];
+        graph = new MazeArrayList[rooms];
 
         this.random = random;
 
@@ -124,7 +123,7 @@ public class Maze {
     public void buildGraph() {
         //System.out.println("Filling graph");
         for (int i = 0; i < rooms; i++) {
-            ArrayList<Edge> proxyList = new ArrayList<>();
+            MazeArrayList<Edge> proxyList = new MazeArrayList<>();
             graph[i] = proxyList;
             for (int j = 0; j < rooms; j++) {
                 if (i != j) {
@@ -175,7 +174,8 @@ public class Maze {
      *
      */
     public void runAstar() {
-        for (Edge edge : spanner) {
+        for (int e = 0; e < spanner.size(); e++) {
+            Edge edge = spanner.get(e);
             //System.out.println("Path for edge " + edge.a + " to " + edge.b);
             int launchX = roomNodes[edge.a].x;
             int launchY = roomNodes[edge.a].y;

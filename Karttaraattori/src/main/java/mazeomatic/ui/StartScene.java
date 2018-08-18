@@ -46,11 +46,11 @@ public class StartScene extends Scene {
         grid.setVgap(5);
         grid.setHgap(5);
 
-        final Label labelWidth = new Label("Leveys:");
+        final Label labelWidth = new Label("Leveys ruutuina:");
         GridPane.setConstraints(labelWidth, 0, 0);
         grid.getChildren().add(labelWidth);
 
-        final Label labelHeight = new Label("Korkeus:");
+        final Label labelHeight = new Label("Korkeus ruutuina:");
         GridPane.setConstraints(labelHeight, 0, 1);
         grid.getChildren().add(labelHeight);
 

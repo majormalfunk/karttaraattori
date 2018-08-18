@@ -6,7 +6,6 @@
 package mazeomatic.logic;
 
 import mazeomatic.structures.AstarNode;
-import java.util.ArrayList;
 import java.util.HashSet; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 import java.util.PriorityQueue; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 
@@ -25,6 +24,7 @@ public class Astar {
     PriorityQueue<AstarNode> heap;
     HashSet<AstarNode> set;
     
+    // We use X_DIFF and Y_DIFF when checking horizontally and vertically around the u node.
     static final int X_DIFF[] = {0, -1, 1, 0};
     static final int Y_DIFF[] = {-1, 0, 0, 1};
 
@@ -79,16 +79,18 @@ public class Astar {
             set.add(u);
             
             for (int d = 0; d < X_DIFF.length; d++) {
+                int vX = u.x + X_DIFF[d];
+                int vY = u.y + Y_DIFF[d];
                 if ((u.x > 1 && u.x < graph.length-2 && u.y > 1 && u.y < graph[0].length-2)
-                        && graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].type != 1
-                        && graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].distToLaunch > u.distToLaunch + distance(u, graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]])) {
-                    heap.remove(graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]]);
-                    graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].distToLaunch = u.distToLaunch + distance(u, graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]]);
-                    path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]] = u;
-                    //System.out.println("Added " + (u.x + X_DIFF[d]) + ", " + (u.y + Y_DIFF[d]) + " to path from " + u.x + ", " + u.y);
-                    //System.out.println("In path [" + (u.x + X_DIFF[d]) + ", " + (u.y + Y_DIFF[d]) + "] = "  + path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].x + ", " + path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].y);
-                    heap.add(graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]]);
-                    if (path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].id == target.id) {
+                        && graph[vX][vY].type != 1
+                        && graph[vX][vY].distToLaunch > u.distToLaunch + distance(u, graph[vX][vY])) {
+                    heap.remove(graph[vX][vY]);
+                    graph[vX][vY].distToLaunch = u.distToLaunch + distance(u, graph[vX][vY]);
+                    path[vX][vY] = u;
+                    //System.out.println("Added " + vX + ", " + vY + " to path from " + u.x + ", " + u.y);
+                    //System.out.println("In path [" + vX + ", " + vY + "] = "  + path[vX][vY].x + ", " + path[vX][vY].y);
+                    heap.add(graph[vX][vY]);
+                    if (path[vX][vY].id == target.id) {
                         //System.out.println("Target has been added to path");
                         //break;
                     }
@@ -99,6 +101,13 @@ public class Astar {
         return path;
     }
     
+    
+    /**
+     * This calculates a Manhattan distance between two nodes
+     * @param from The starting (launch) node
+     * @param to The ending (target) node
+     * @return distance in block units
+     */
     private int distance(AstarNode from, AstarNode to) {
         return Math.abs(from.x - to.x) + Math.abs(from.y - to.y);
     }

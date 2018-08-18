@@ -7,7 +7,7 @@ package mazeomatic.logic;
 
 import mazeomatic.structures.Edge;
 import mazeomatic.structures.PrimNode;
-import java.util.ArrayList; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
+import mazeomatic.structures.MazeArrayList; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 import java.util.PriorityQueue; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 
 /**
@@ -17,7 +17,7 @@ import java.util.PriorityQueue; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATIO
  */
 public class Prim {
 
-    ArrayList<Edge>[] graph;
+    MazeArrayList<Edge>[] graph;
     PrimNode[] nodes;
     int start;
 
@@ -36,7 +36,7 @@ public class Prim {
      * @see mazeomatic.logic.Edge
      * @see mazeomatic.logic.PrimNode
      */
-    public Prim(ArrayList<Edge>[] graph, PrimNode[] nodes, int start) {
+    public Prim(MazeArrayList<Edge>[] graph, PrimNode[] nodes, int start) {
 
         this.graph = graph;
         this.nodes = nodes;
@@ -53,8 +53,8 @@ public class Prim {
      *
      * @return An ArrayList of the edges making up the spanning tree
      */
-    public ArrayList<Edge> buildSpanningTree() {
-        ArrayList<Edge> spanner = new ArrayList<>();
+    public MazeArrayList<Edge> buildSpanningTree() {
+        MazeArrayList<Edge> spanner = new MazeArrayList<>();
 
         for (int i = 0; i < distance.length; i++) {
             distance[i] = Integer.MAX_VALUE;
@@ -77,7 +77,8 @@ public class Prim {
                 spanner.add(new Edge(parent[u.id], u.id, distance[u.id]));
                 //System.out.println("Added to list " + parent[u.id] + " -> " + u.id);
             }
-            for (Edge e : graph[u.id]) {
+            for (int g = 0; g < graph[u.id].size(); g++) {
+                Edge e = graph[u.id].get(g);
                 //System.out.println("Looping through : " + e.a + "(" + u.id+ ") : " + e.b);
                 //System.out.println("Heap contains " + heap.contains(nodes[e.b]));
                 //System.out.println("Weight " + e.a + " -> " + e.b + " : " + e.weight);

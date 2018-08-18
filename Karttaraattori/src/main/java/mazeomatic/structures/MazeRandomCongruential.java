@@ -5,7 +5,7 @@
  */
 package mazeomatic.structures;
 
-import java.util.Random; // WE MAY NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
+import java.util.Random; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 
 /**
  *
