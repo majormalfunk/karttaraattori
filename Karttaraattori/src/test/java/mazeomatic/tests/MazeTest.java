@@ -38,7 +38,7 @@ public class MazeTest {
     @Test
     public void testWidthOfMazeArray() {
         
-        MazeRandom random = new MazeRandomMock();
+        MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
@@ -47,7 +47,7 @@ public class MazeTest {
 
     @Test
     public void testHeightOfMazeArray() {
-        MazeRandom random = new MazeRandomMock();
+        MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
@@ -56,7 +56,7 @@ public class MazeTest {
 
     @Test
     public void testRoomCountInList() {
-        MazeRandom random = new MazeRandomMock();
+        MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
@@ -65,7 +65,7 @@ public class MazeTest {
 
     @Test
     public void testToFindRoomsInFinalMap() {
-        MazeRandom random = new MazeRandomMock();
+        MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
@@ -76,7 +76,7 @@ public class MazeTest {
 
     @Test
     public void testDistanceOfFirstAndLastRoom() {
-        MazeRandom random = new MazeRandomMock();
+        MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, 2, random);
         PrimNode room0 = new PrimNode(3, 3, 0, 0);
         maze.roomNodes[0] = room0;
@@ -93,7 +93,7 @@ public class MazeTest {
     public void testPrim1() {
         // This is just a basic test to find out that Prim builds a predefined
         // spanning tree correctly.
-        MazeRandom random = new MazeRandomMock();
+        MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, 5, random);
         PrimNode room0 = new PrimNode(2, 2, 0, 0);
         maze.roomNodes[0] = room0;
@@ -204,8 +204,6 @@ public class MazeTest {
             pathLength++;
         }
         assertEquals(7, pathLength);
-        // HERE'S AN ERROR BECAUSE MY A* BUILDS THE PATH SOMETIMES DIAGONALLY. NEED TO FIX IT.
-        // SHOULD BE: assertEquals(9, pathLength);
         
 
     }

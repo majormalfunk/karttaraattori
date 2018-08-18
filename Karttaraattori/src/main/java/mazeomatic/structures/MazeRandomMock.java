@@ -16,7 +16,7 @@ public class MazeRandomMock implements MazeRandom {
     
     public MazeRandomMock() {
         
-        fakeRandom = new int[]{0, 0, 4, 4};
+        fakeRandom = new int[]{17, 20, 24, 23};
         counter = 0;
 
     }

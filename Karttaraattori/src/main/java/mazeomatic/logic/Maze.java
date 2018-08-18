@@ -176,14 +176,14 @@ public class Maze {
      */
     public void runAstar() {
         for (Edge edge : spanner) {
-            System.out.println("Path for edge " + edge.a + " to " + edge.b);
+            //System.out.println("Path for edge " + edge.a + " to " + edge.b);
             int launchX = roomNodes[edge.a].x;
             int launchY = roomNodes[edge.a].y;
             int targetX = roomNodes[edge.b].x;
             int targetY = roomNodes[edge.b].y;
             AstarNode launch = new AstarNode(launchX, launchY, 0, ((launchX * map.length) + launchY));
             launch.setAsLaunch();
-            AstarNode target = new AstarNode(targetX, targetY, 0, ((targetY * map.length) + launchY));
+            AstarNode target = new AstarNode(targetX, targetY, 0, ((targetX * map.length) + targetY));
             target.setAsTarget();
             AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
             for (int i = 0; i < map.length; i++) {
@@ -229,11 +229,11 @@ public class Maze {
             map[x][y] = 3;
             while (true) {
                 if (shortestPath[x][y] == null) {
-                    System.out.println("  - path is null");
+                    //System.out.println("  - path is null");
                     break;
                 }
                 if (shortestPath[x][y].x == launch.x && shortestPath[x][y].y == launch.y) {
-                    System.out.println("  - path reached end");
+                    //System.out.println("  - path reached end");
                     break;
                 }
                 AstarNode node = shortestPath[x][y];
@@ -248,7 +248,7 @@ public class Maze {
                 edx = x;
                 edy = y;
             }
-
+            
         }
         //AstarNode launch
         //AstarNode target

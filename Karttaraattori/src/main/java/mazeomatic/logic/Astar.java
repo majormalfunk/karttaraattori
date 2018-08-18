@@ -71,7 +71,7 @@ public class Astar {
                 heap.add(graph[i][j]);
             }
         }
-        System.out.println("FROM " + launch.x + ", " + launch.y + " TO " + target.x + ", " + target.y);
+        //System.out.println("FROM " + launch.x + ", " + launch.y + " TO " + target.x + ", " + target.y);
         while (!set.contains(target)) {
             AstarNode u = heap.poll();
             //System.out.println("Polled " + u.x + ", " + u.y);
@@ -88,6 +88,10 @@ public class Astar {
                     //System.out.println("Added " + (u.x + X_DIFF[d]) + ", " + (u.y + Y_DIFF[d]) + " to path from " + u.x + ", " + u.y);
                     //System.out.println("In path [" + (u.x + X_DIFF[d]) + ", " + (u.y + Y_DIFF[d]) + "] = "  + path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].x + ", " + path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].y);
                     heap.add(graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]]);
+                    if (path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].id == target.id) {
+                        //System.out.println("Target has been added to path");
+                        //break;
+                    }
                 }
             }
         }
