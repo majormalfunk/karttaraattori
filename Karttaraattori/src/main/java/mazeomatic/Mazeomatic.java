@@ -6,8 +6,11 @@ import static javafx.application.Application.launch;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 import mazeomatic.logic.Maze;
+import mazeomatic.structures.MazeRandom;
 import mazeomatic.ui.MazeScene;
 import mazeomatic.ui.StartScene;
+import mazeomatic.structures.MazeRandomCongruential;
+import mazeomatic.structures.MazeRandomMock;
 
 public class Mazeomatic extends Application {
 
@@ -20,6 +23,7 @@ public class Mazeomatic extends Application {
     public int mazeHeight;
     public int rooms;
     public Maze maze;
+    public MazeRandom random;
 
     public static final int MIN_SIZE = 8;
     public static final int MIN_ROOMS = 2;
@@ -33,6 +37,9 @@ public class Mazeomatic extends Application {
         mazeWidth = 0;
         mazeHeight = 0;
         rooms = 0;
+        
+        random = new MazeRandomCongruential();
+        //random = new MazeRandomMock();
 
         root = new Group();
         this.stage = stage;
@@ -84,7 +91,7 @@ public class Mazeomatic extends Application {
      * Calls the constructor of the Maze class
      */
     private void makeMaze() {
-        maze = new Maze(mazeWidth, mazeHeight, rooms);
+        maze = new Maze(mazeWidth, mazeHeight, rooms, random);
     }
 
     /**

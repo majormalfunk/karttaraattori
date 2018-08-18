@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazeomatic.logic;
+package mazeomatic.structures;
 
 /**
  *
  * @author jaakkovilenius
  */
-public class MazeHashSet {
+public class MazePriorityQueue {
     
-    public MazeHashSet() {
+    public MazePriorityQueue() {
         
     }
     

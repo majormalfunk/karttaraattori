@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazeomatic.logic;
+package mazeomatic.structures;
 
 /**
  * The PrimNode class. It will be used to represent maze elements in proximity lists
@@ -14,9 +14,10 @@ public class AstarNode implements Comparable<AstarNode> {
 
     public int x;
     public int y;
-    int distToLaunch;
-    int distToTarget;
-    int type;
+    public int type;
+    public int id;
+    public int distToLaunch;
+    public int distToTarget;
     AstarNode path;
     /**
      * The constructor
@@ -24,10 +25,11 @@ public class AstarNode implements Comparable<AstarNode> {
      * @param x The x coordinate
      * @param y The y coordinate
      */
-    public AstarNode(int x, int y, int type) {
+    public AstarNode(int x, int y, int type, int id) {
         this.x = x;
         this.y = y;
         this.type = type;
+        this.id = id;
         distToLaunch = Integer.MAX_VALUE;
         distToTarget = Integer.MAX_VALUE;
         path = null;
@@ -55,7 +57,7 @@ public class AstarNode implements Comparable<AstarNode> {
     public boolean equals(Object o) {
         AstarNode n = (AstarNode) o;
         //System.out.println("Testing equality");
-        if (n.x == this.x && n.y == this.y) {
+        if (n.id == this.id) {
             return true;
         }
 
@@ -65,7 +67,8 @@ public class AstarNode implements Comparable<AstarNode> {
     @Override
     public int hashCode() {
         // E.g. x = 9 and y 30 => (x*10^2)+y = 9*100+30 = 930
-        return (this.x*(10^(String.valueOf(this.y).length())))+this.y;
+        // return (this.x*(10^(String.valueOf(this.y).length())))+this.y;
+        return this.id;
     }
 
 }

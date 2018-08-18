@@ -5,6 +5,8 @@
  */
 package mazeomatic.logic;
 
+import mazeomatic.structures.Edge;
+import mazeomatic.structures.PrimNode;
 import java.util.ArrayList; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 import java.util.PriorityQueue; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 

@@ -6,10 +6,13 @@
 package mazeomatic.tests;
 
 import mazeomatic.logic.Astar;
-import mazeomatic.logic.AstarNode;
+import mazeomatic.structures.AstarNode;
 import mazeomatic.logic.Maze;
-import mazeomatic.logic.Edge;
-import mazeomatic.logic.PrimNode;
+import mazeomatic.structures.Edge;
+import mazeomatic.structures.MazeRandom;
+import mazeomatic.structures.MazeRandomCongruential;
+import mazeomatic.structures.MazeRandomMock;
+import mazeomatic.structures.PrimNode;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,17 +25,21 @@ import static org.junit.Assert.*;
 public class MazeTest {
 
     public Maze maze;
+    public MazeRandom random;
 
     final static int WIDTH = 20;
     final static int HEIGHT = 20;
     final static int ROOMS = 5;
 
     public MazeTest() {
+        
     }
 
     @Test
     public void testWidthOfMazeArray() {
-        maze = new Maze(WIDTH, HEIGHT, ROOMS);
+        
+        MazeRandom random = new MazeRandomMock();
+        maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
         assertEquals(WIDTH, maze.map.length);
@@ -40,7 +47,8 @@ public class MazeTest {
 
     @Test
     public void testHeightOfMazeArray() {
-        maze = new Maze(WIDTH, HEIGHT, ROOMS);
+        MazeRandom random = new MazeRandomMock();
+        maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
         assertEquals(HEIGHT, maze.map[0].length);
@@ -48,7 +56,8 @@ public class MazeTest {
 
     @Test
     public void testRoomCountInList() {
-        maze = new Maze(WIDTH, HEIGHT, ROOMS);
+        MazeRandom random = new MazeRandomMock();
+        maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
         assertEquals(ROOMS, maze.roomNodes.length);
@@ -56,7 +65,8 @@ public class MazeTest {
 
     @Test
     public void testToFindRoomsInFinalMap() {
-        maze = new Maze(WIDTH, HEIGHT, ROOMS);
+        MazeRandom random = new MazeRandomMock();
+        maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
         for (int t = 0; t < maze.roomNodes.length; t++) {
@@ -66,7 +76,8 @@ public class MazeTest {
 
     @Test
     public void testDistanceOfFirstAndLastRoom() {
-        maze = new Maze(WIDTH, HEIGHT, 2);
+        MazeRandom random = new MazeRandomMock();
+        maze = new Maze(WIDTH, HEIGHT, 2, random);
         PrimNode room0 = new PrimNode(3, 3, 0, 0);
         maze.roomNodes[0] = room0;
         PrimNode room1 = new PrimNode(WIDTH - 3, HEIGHT - 3, 0, 1);
@@ -82,7 +93,8 @@ public class MazeTest {
     public void testPrim1() {
         // This is just a basic test to find out that Prim builds a predefined
         // spanning tree correctly.
-        maze = new Maze(WIDTH, HEIGHT, 5);
+        MazeRandom random = new MazeRandomMock();
+        maze = new Maze(WIDTH, HEIGHT, 5, random);
         PrimNode room0 = new PrimNode(2, 2, 0, 0);
         maze.roomNodes[0] = room0;
         PrimNode room1 = new PrimNode(10, 2, 0, 1);
@@ -116,7 +128,8 @@ public class MazeTest {
         // based on a random graph is always the same with the same graph
         // no matter from which vertice we start building the tree.
         int firstTotal = 0;
-        maze = new Maze(WIDTH, HEIGHT, ROOMS);
+        MazeRandom random = new MazeRandomCongruential();
+        maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
         maze.placeRoomsInMaze();
         maze.buildGraph();
@@ -154,17 +167,17 @@ public class MazeTest {
         AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
-                AstarNode node = new AstarNode(i, j, 0); // Passable
+                AstarNode node = new AstarNode(i, j, 0, (i*map.length)+j); // Passable
                 astarGraph[i][j] = node;
             }
         }
-        AstarNode launch = new AstarNode(3, 3, 0);
+        AstarNode launch = new AstarNode(3, 3, 0, (3*map.length)+3);
         launch.setAsLaunch();
         astarGraph[3][3] = launch;
-        AstarNode target = new AstarNode(11, 3, 0);
+        AstarNode target = new AstarNode(11, 3, 0, (11*map.length)+3);
         target.setAsTarget();
         astarGraph[11][3] = target;
-        AstarNode obstacle = new AstarNode(7, 3, 1);
+        AstarNode obstacle = new AstarNode(7, 3, 1, (7*map.length)+3);
         astarGraph[7][3] = obstacle;
         
 
@@ -192,7 +205,8 @@ public class MazeTest {
         }
         assertEquals(7, pathLength);
         // HERE'S AN ERROR BECAUSE MY A* BUILDS THE PATH SOMETIMES DIAGONALLY. NEED TO FIX IT.
-
+        // SHOULD BE: assertEquals(9, pathLength);
+        
 
     }
 

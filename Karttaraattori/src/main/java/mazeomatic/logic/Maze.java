@@ -5,14 +5,20 @@
  */
 package mazeomatic.logic;
 
+import mazeomatic.structures.Edge;
+import mazeomatic.structures.AstarNode;
+import mazeomatic.structures.PrimNode;
+import mazeomatic.structures.MazeRandom;
+
 import java.util.ArrayList; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
-import java.util.Random; // WE MAY NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 
 /**
- * This class represents the maze. It is basically a 2D int array. At this point
- * 0 means no wall and 1 means a wall.
+ * This class represents the maze. The actual maze data is stored as a 2D int
+ * array.
+ *
  *
  * @author jaakkovilenius
+ *
  */
 public class Maze {
 
@@ -23,7 +29,7 @@ public class Maze {
     public int[][] map; // The final map
     public ArrayList<Edge>[] graph; // Graph of the edges as a proximity list
 
-    private Random random; // Random number generator
+    private MazeRandom random; // Random number generator
 
     public PrimNode[] roomNodes; // List of the room nodes
 
@@ -40,7 +46,7 @@ public class Maze {
      * @param height Height of the maze in grid blocks
      * @param rooms Number of rooms on the maze
      */
-    public Maze(int width, int height, int rooms) {
+    public Maze(int width, int height, int rooms, MazeRandom random) {
         this.width = width;
         this.height = height;
         this.rooms = rooms;
@@ -58,7 +64,7 @@ public class Maze {
 
         graph = new ArrayList[rooms];
 
-        random = new Random();
+        this.random = random;
 
         roomNodes = new PrimNode[rooms];
 
@@ -98,7 +104,8 @@ public class Maze {
     public void chooseRoomLocations() {
         //System.out.println("Placing rooms");
         for (int i = 0; i < rooms; i++) {
-            // HERE WE MIGHT HAVE A PROBLEM IF 2 ROOMS GET PLACED IN THE SAME PLACE
+            // We don't mind if rooms overlap. It just brings variation to
+            // visible room sizes and shapes
             int roomX = random.nextInt(width - 4) + 2;
             int roomY = random.nextInt(height - 4) + 2;
             PrimNode room = new PrimNode(roomX, roomY, 1, i);
@@ -128,16 +135,14 @@ public class Maze {
                 }
             }
         }
-        /**
-        System.out.println("Proximity list:");
-        for (int g = 0; g < graph.length; g++) {
-            System.out.print(g + " : ");
-            for (Edge e : graph[g]) {
-                System.out.print(e.a + ">" + e.b + "=" + e.weight + " ");
-            }
-            System.out.print("\n");
+        /*
+        System.out.println("Proximity list:"); for (int g = 0; g < graph.length; g++) {
+        System.out.print(g + " : ");
+        for (Edge e : graph[g]) {
+          System.out.print(e.a + " > " + e.b + "=" + e.weight + " "); }
+          System.out.print("\n");
         }
-        **/
+        */
 
     }
 
@@ -151,15 +156,13 @@ public class Maze {
         prim = new Prim(graph, roomNodes, start);
         spanner = prim.buildSpanningTree();
         /**
-        System.out.println("Prim's result:");
-        System.out.println("==============");
-        int total = 0;
-        for (Edge e : spanner) {
-            System.out.println("E: " + e.a + " -> " + e.b + " : " + e.weight);
-            total += e.weight;
-        }
-        System.out.println("Total weight: " + total);
-        **/
+         * System.out.println("Prim's result:");
+         * System.out.println("=============="); int total = 0; for (Edge e :
+         * spanner) { System.out.println("E: " + e.a + " -> " + e.b + " : " +
+         * e.weight); total += e.weight; } System.out.println("Total weight: " +
+         * total);
+         *
+         */
     }
 
     /**
@@ -167,34 +170,58 @@ public class Maze {
      *
      * It first builds the parameters for Astar. The map object must contain the
      * rooms before we can build corridors between then. Also Prim's has to be
-     * run first so we have pairs of rooms as launch node and target node.
+     * run first so we have pairs of rooms as a launch node and a target node.
      *
      *
      */
     public void runAstar() {
         for (Edge edge : spanner) {
-            AstarNode launch = new AstarNode(roomNodes[edge.a].x, roomNodes[edge.a].y, 0);
+            System.out.println("Path for edge " + edge.a + " to " + edge.b);
+            int launchX = roomNodes[edge.a].x;
+            int launchY = roomNodes[edge.a].y;
+            int targetX = roomNodes[edge.b].x;
+            int targetY = roomNodes[edge.b].y;
+            AstarNode launch = new AstarNode(launchX, launchY, 0, ((launchX * map.length) + launchY));
             launch.setAsLaunch();
-            AstarNode target = new AstarNode(roomNodes[edge.b].x, roomNodes[edge.b].y, 0);
+            AstarNode target = new AstarNode(targetX, targetY, 0, ((targetY * map.length) + launchY));
             target.setAsTarget();
             AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
             for (int i = 0; i < map.length; i++) {
                 for (int j = 0; j < map[0].length; j++) {
-                    AstarNode node = new AstarNode(i, j, 1); // Impassable
-                    if (map[i][j] == 0 || map[i][j] == 3
-                            || (i >= launch.x - 2 && i <= launch.x + 2 && j >= launch.y - 2 && j <= launch.y + 2)
-                            || (i >= target.x - 2 && i <= target.x + 2 && j >= target.y - 2 && j <= target.y + 2)) { // Wall or corridor
+                    AstarNode node = new AstarNode(i, j, 1, ((i * map.length) + j)); // Impassable
+                    if (map[i][j] == 0 || map[i][j] == 3 // Wall or corridor
+                            || (i >= launchX - 2 && i <= launchX + 2 && j >= launchY - 2 && j <= launchY + 2)
+                            || (i >= targetX - 2 && i <= targetX + 2 && j >= targetY - 2 && j <= targetY + 2)) {
                         node.type = 0; // Passable
                     }
                     astarGraph[i][j] = node;
                 }
             }
-            
+
             //System.out.println("A* graph");
             //logAstarGraph(astarGraph);
-            
             astar = new Astar(astarGraph, launch, target);
             AstarNode[][] shortestPath = astar.buildShortestPath();
+            /*
+            System.out.println("Shortest path:");
+            for (int k = 0; k < shortestPath.length; k++) {
+                System.out.print(k + " ");
+                for (int l = 0; l < shortestPath[0].length; l++) {
+                    try {
+                        System.out.print("|" + shortestPath[l][k].x + "," + shortestPath[l][k].y);
+                    } catch (Exception e) {
+                        System.out.print("|   ");
+                    }
+                }
+                System.out.print("|\n");
+            }
+            System.out.print("  ");
+            for (int m = 0; m < shortestPath[0].length; m++) {
+                System.out.print("| "+ m +" ");
+            }
+            System.out.print("|\n");
+            */
+
             int x = target.x;
             int edx = target.x;
             int y = target.y;
@@ -202,16 +229,21 @@ public class Maze {
             map[x][y] = 3;
             while (true) {
                 if (shortestPath[x][y] == null) {
+                    System.out.println("  - path is null");
                     break;
                 }
                 if (shortestPath[x][y].x == launch.x && shortestPath[x][y].y == launch.y) {
+                    System.out.println("  - path reached end");
                     break;
                 }
-                x = shortestPath[x][y].x;
-                y = shortestPath[x][y].y;
-                if (Math.abs(x-edx) + Math.abs(y-edy) != 1) {
-                    System.out.println("VIRHE! Liikkuu kulmittain x: " + x + " vs " + edx + " y: " + y + " vs " +edy);
+                AstarNode node = shortestPath[x][y];
+                x = node.x;
+                y = node.y;
+                //System.out.println("x=" + x + " y=" + y + " edx=" + edx + " edy=" + edy);
+                if (Math.abs(x - edx) + Math.abs(y - edy) != 1) {
+                    System.out.println("VIRHE! Liikkuu kulmittain x: " + x + " vs " + edx + " y: " + y + " vs " + edy);
                 }
+                //System.out.println("Adding corridor at " + x + ", " + y);
                 map[x][y] = 3;
                 edx = x;
                 edy = y;
@@ -221,7 +253,7 @@ public class Maze {
         //AstarNode launch
         //AstarNode target
     }
-    
+
     private void logAstarGraph(AstarNode[][] astarGraph) {
         for (int i = 0; i < astarGraph.length; i++) {
             for (int j = 0; j < astarGraph[0].length; j++) {

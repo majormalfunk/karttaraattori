@@ -12,8 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import mazeomatic.Mazeomatic;
-import mazeomatic.logic.Edge;
-import mazeomatic.logic.PrimNode;
+import mazeomatic.structures.Edge;
+import mazeomatic.structures.PrimNode;
 
 /**
  * This scene shows the constructed maze
@@ -109,6 +109,7 @@ public class MazeScene extends Scene {
             line.setEndX(endX);
             line.setEndY(endY);
             line.setStroke(Color.WHITE);
+            line.setOpacity(0.5);
             line.setStrokeWidth(5);
             pane.getChildren().add(line);
         }

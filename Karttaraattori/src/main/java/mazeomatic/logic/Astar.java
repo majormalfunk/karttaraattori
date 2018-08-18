@@ -5,6 +5,8 @@
  */
 package mazeomatic.logic;
 
+import mazeomatic.structures.AstarNode;
+import java.util.ArrayList;
 import java.util.HashSet; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 import java.util.PriorityQueue; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 
@@ -18,7 +20,7 @@ public class Astar {
     AstarNode[][] graph;
     AstarNode launch;
     AstarNode target;
-
+    
     AstarNode[][] path;
     PriorityQueue<AstarNode> heap;
     HashSet<AstarNode> set;
@@ -36,8 +38,8 @@ public class Astar {
      * @param launch The node from which to launch the path building
      * @param target The target node
      *
-     * @see mazeomatic.logic.Edge
-     * @see mazeomatic.logic.PrimNode
+     * @see mazeomatic.structures.Edge
+     * @see mazeomatic.structures.PrimNode
      */
     public Astar(AstarNode[][] graph, AstarNode launch, AstarNode target) {
 
@@ -58,8 +60,8 @@ public class Astar {
      */
     public AstarNode[][] buildShortestPath() {
 
-        for (int i = 1; i < graph.length; i++) {
-            for (int j = 1; j < graph[0].length; j++) {
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
                 if (i == launch.x && j == launch.y) {
                     graph[i][j].distToLaunch = 0;
                 } else {
@@ -69,7 +71,7 @@ public class Astar {
                 heap.add(graph[i][j]);
             }
         }
-        //System.out.println("FROM " + launch.x + ", " + launch.y + " TO " + target.x + ", " + target.y);
+        System.out.println("FROM " + launch.x + ", " + launch.y + " TO " + target.x + ", " + target.y);
         while (!set.contains(target)) {
             AstarNode u = heap.poll();
             //System.out.println("Polled " + u.x + ", " + u.y);
@@ -83,6 +85,8 @@ public class Astar {
                     heap.remove(graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]]);
                     graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].distToLaunch = u.distToLaunch + distance(u, graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]]);
                     path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]] = u;
+                    //System.out.println("Added " + (u.x + X_DIFF[d]) + ", " + (u.y + Y_DIFF[d]) + " to path from " + u.x + ", " + u.y);
+                    //System.out.println("In path [" + (u.x + X_DIFF[d]) + ", " + (u.y + Y_DIFF[d]) + "] = "  + path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].x + ", " + path[u.x + X_DIFF[d]][u.y + Y_DIFF[d]].y);
                     heap.add(graph[u.x + X_DIFF[d]][u.y + Y_DIFF[d]]);
                 }
             }

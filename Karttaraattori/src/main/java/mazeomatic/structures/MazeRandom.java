@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazeomatic.logic;
+package mazeomatic.structures;
 
 /**
  *
  * @author jaakkovilenius
  */
-public class MazePriorityQueue {
+public interface MazeRandom {
     
-    public MazePriorityQueue() {
-        
-    }
-    
+    public int nextInt(int n);
+
 }
+    
