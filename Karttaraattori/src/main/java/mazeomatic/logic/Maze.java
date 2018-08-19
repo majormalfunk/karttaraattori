@@ -198,30 +198,9 @@ public class Maze {
                 }
             }
 
-            //System.out.println("A* graph");
-            //logAstarGraph(astarGraph);
             astar = new Astar(astarGraph, launch, target);
             AstarNode[][] shortestPath = astar.buildShortestPath();
-            /*
-            System.out.println("Shortest path:");
-            for (int k = 0; k < shortestPath.length; k++) {
-                System.out.print(k + " ");
-                for (int l = 0; l < shortestPath[0].length; l++) {
-                    try {
-                        System.out.print("|" + shortestPath[l][k].x + "," + shortestPath[l][k].y);
-                    } catch (Exception e) {
-                        System.out.print("|   ");
-                    }
-                }
-                System.out.print("|\n");
-            }
-            System.out.print("  ");
-            for (int m = 0; m < shortestPath[0].length; m++) {
-                System.out.print("| "+ m +" ");
-            }
-            System.out.print("|\n");
-            */
-
+            
             int x = target.x;
             int edx = target.x;
             int y = target.y;
@@ -252,24 +231,6 @@ public class Maze {
         }
         //AstarNode launch
         //AstarNode target
-    }
-
-    private void logAstarGraph(AstarNode[][] astarGraph) {
-        for (int i = 0; i < astarGraph.length; i++) {
-            for (int j = 0; j < astarGraph[0].length; j++) {
-                if (astarGraph[i][j] != null) {
-                    System.out.print("|" + astarGraph[i][j].type);
-                } else {
-                    System.out.print("| ");
-                }
-            }
-            System.out.print("|\n");
-            for (int j = 0; j < astarGraph[0].length; j++) {
-                System.out.print("--");
-            }
-            System.out.print("\n");
-        }
-
     }
 
     /**

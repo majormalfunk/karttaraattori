@@ -12,8 +12,6 @@ import mazeomatic.structures.Edge;
 import mazeomatic.structures.MazeRandom;
 import mazeomatic.structures.MazeRandomCongruential;
 import mazeomatic.structures.PrimNode;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,7 +19,7 @@ import static org.junit.Assert.*;
  *
  * @author jaakkovilenius
  */
-public class MazeTest {
+public class MazeGeneralTest {
 
     public Maze maze;
     public MazeRandom random;
@@ -30,7 +28,7 @@ public class MazeTest {
     final static int HEIGHT = 20;
     final static int ROOMS = 5;
 
-    public MazeTest() {
+    public MazeGeneralTest() {
 
     }
 

@@ -26,21 +26,35 @@ public class MazeArrayList<T> {
         this.counter = 0;
     }
     
-    public void add(T item) {
+    public boolean add(T item) {
         if (this.counter == this.items.length) {
             resize();
         }
         
         this.items[this.counter] = item;
         this.counter++;
+        
+        return true;
+    }
+    
+    public void add(int index, T item) {
+        if (index < 0 || index >= this.counter) {
+            throw new ArrayIndexOutOfBoundsException("Index " + index + " out of bounds [0, " + (this.counter-1) + "]");
+        }
+
+        if (this.counter == this.items.length) {
+            resize();
+        }
+        
+        moveRight(index);
+        
+        this.items[index] = item;
+        this.counter++;
     }
     
     private void resize() {
-        T[] newItems = (T[]) new Object[this.items.length *3 / 2 + 1];
-        for (int i = 0; i < this.items.length; i++) {
-            newItems[i] = this.items[i];
-        }
-        
+        T[] newItems = (T[]) new Object[this.items.length * 3 / 2 + 1];
+        System.arraycopy(this.items, 0, newItems, 0, this.items.length);
         this.items = newItems;
     }
     
@@ -60,18 +74,35 @@ public class MazeArrayList<T> {
     }
     
     private void moveLeft(int fromIndex) {
-        for (int i = fromIndex; i < this.counter -1; i++) {
+        for (int i = fromIndex; i < this.counter - 1; i++) {
             this.items[i] = this.items[i + 1];
         }
     }
     
-    public void remove(T item) {
+    private void moveRight(int fromIndex) {
+        for (int i = this.counter - 1; i >= fromIndex; i--) {
+            this.items[i + 1] = this.items[i];
+        }
+    }
+
+    public T remove(int index) {
+        if (index < 0 || index >= this.counter) {
+            throw new ArrayIndexOutOfBoundsException("Index " + index + " out of bounds [0, " + (this.counter - 1) + "]");
+        }
+        T removable = get(index);
+        moveLeft(index);
+        this.counter--;
+        return removable;
+    }
+    
+    public boolean remove(T item) {
         int indexOfItem = indexOf(item);
         if (indexOfItem < 0) {
-            return; // ei löydy
+            return false; // ei löydy
         }
         moveLeft(indexOfItem);
         this.counter--;
+        return true;
     }
     
     public T get(int index) {
