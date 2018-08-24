@@ -6,5 +6,19 @@ Aiheenani harjoitustyössä on karttageneraattori. Karttageneraattori generoi pr
 
 Tarkemmat kuvaukset löytyvät projektin dokumentaatiosta:
 
-[Määrittelydokumentti]()
+[Määrittelydokumentti](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Maarittelydokumentti.md)
+
+[Testausdokumentti](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Testausdokumentti.md)
+
+## Viikkoraportit
+
+[Viikkoraportti 1](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti1.md)
+
+[Viikkoraportti 2](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti2.md)
+
+[Viikkoraportti 3](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti3.md)
+
+[Viikkoraportti 4](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti4.md)
+
+[Viikkoraportti 5](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti5.md)
 

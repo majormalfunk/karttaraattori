@@ -1,4 +1,4 @@
-Viikkoraportti: Viikko 1
+## Viikkoraportti: Viikko 1
 
 Ensimmäisellä viikolla osallistuin aloitusluentoon. Aloitusluennon jälkeen keskustelin muiden kurssin osallistujien sekä kurssin aikaisemmin suorittaneiden kanssa aihevalinnoista. Lyhyen pohdinnan jälkeen rajasin aihevalinnan joko salausalgoritmiin tai karttageneraattoriin.
 
