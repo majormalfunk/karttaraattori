@@ -56,34 +56,22 @@ public class Prim {
     public MazeArrayList<Edge> buildSpanningTree() {
         MazeArrayList<Edge> spanner = new MazeArrayList<>();
 
-        for (int i = 0; i < distance.length; i++) {
-            distance[i] = Integer.MAX_VALUE;
-            parent[i] = -1;
-        }
-        distance[start] = 0;
-
-        for (int n = 0; n < nodes.length; n++) {
-            //System.out.println("Adding to heap " + n + " = " + nodes[n].id);
-            nodes[n].distance = distance[n];
-            heap.add(nodes[n]);
-            //System.out.println("Heap size = " + heap.size());
-        }
-
+        initArrays();
+        addNodesToHeap();
+        
         while (!heap.isEmpty()) {
+            // Poll the nearest node from the heap
             PrimNode u = heap.poll();
-            //System.out.println("Polled " + u.id);
-            //System.out.println("Heap size = " + heap.size());
+            // If it already has a parent we add it to the spanning tree
             if (parent[u.id] != -1) {
                 spanner.add(new Edge(parent[u.id], u.id, distance[u.id]));
-                //System.out.println("Added to list " + parent[u.id] + " -> " + u.id);
             }
+            // Then we loop through the nodes on the proximity list
             for (int g = 0; g < graph[u.id].size(); g++) {
                 Edge e = graph[u.id].get(g);
-                //System.out.println("Looping through : " + e.a + "(" + u.id+ ") : " + e.b);
-                //System.out.println("Heap contains " + heap.contains(nodes[e.b]));
-                //System.out.println("Weight " + e.a + " -> " + e.b + " : " + e.weight);
                 if (heap.contains(nodes[e.b]) && e.weight < distance[e.b]) {
-                    //System.out.println("PrimNode " + nodes[e.b] + " in heap");
+                    // This will change when we implement ou minimum heap
+                    // Java's PriorityQueue doesn't have a decrease key command.
                     parent[e.b] = u.id;
                     distance[e.b] = e.weight;
                     heap.remove(nodes[e.b]);
@@ -94,6 +82,27 @@ public class Prim {
         }
 
         return spanner;
+    }
+    
+    private void initArrays() {
+        // Set all nodes' distance value to MAX and
+        // distance array values to MAX and
+        // all parent array values to -1 (= no parent yet)
+        for (int i = 0; i < nodes.length; i++) {
+            nodes[i].distance = Integer.MAX_VALUE;
+            distance[i] = Integer.MAX_VALUE;
+            parent[i] = -1;
+        }
+        nodes[start].distance = 0;
+        distance[start] = 0;
+    }
+    
+    private void addNodesToHeap() {
+        // Add all nodes to heap
+        for (int n = 0; n < nodes.length; n++) {
+            heap.add(nodes[n]);
+        }
+
     }
 
 }

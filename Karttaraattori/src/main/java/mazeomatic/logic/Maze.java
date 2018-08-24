@@ -44,12 +44,28 @@ public class Maze {
      * @param width Width of the maze in grid blocks
      * @param height Height of the maze in grid blocks
      * @param rooms Number of rooms on the maze
+     * @param random A random number generator
      */
     public Maze(int width, int height, int rooms, MazeRandom random) {
         this.width = width;
         this.height = height;
         this.rooms = rooms;
 
+        initMap();
+        
+        graph = new MazeArrayList[rooms];
+
+        this.random = random;
+
+        roomNodes = new PrimNode[rooms];
+
+    }
+    
+    /**
+     * This initializes the map. It fills a 2D array with value 4 (edge) on the edges and otherwise with zeros.
+     */
+    public final void initMap() {
+        
         map = new int[width][height];
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
@@ -61,12 +77,6 @@ public class Maze {
             }
         }
 
-        graph = new MazeArrayList[rooms];
-
-        this.random = random;
-
-        roomNodes = new PrimNode[rooms];
-
     }
 
     /**
@@ -75,6 +85,11 @@ public class Maze {
     public void placeRoomsInMaze() {
         for (int k = 0; k < roomNodes.length; k++) {
             PrimNode node = roomNodes[k];
+            // We'll go through two blocks in every direction of the room node.
+            // The nearest 1 blocks around the center belong to the room.
+            // The farthest 1 blocks around the center mark room edges. (Not the same as graph edges)
+            // Corridors not involving this room must go around the edges and not
+            // pass through the room.
             for (int l = node.x - 2; l < node.x + 3; l++) {
                 for (int m = node.y - 2; m < node.y + 3; m++) {
                     if (l == node.x && m == node.y) {
@@ -94,9 +109,8 @@ public class Maze {
                 }
             }
         }
-
     }
-
+    
     /**
      * This function builds a list of the room nodes
      */
@@ -105,6 +119,10 @@ public class Maze {
         for (int i = 0; i < rooms; i++) {
             // We don't mind if rooms overlap. It just brings variation to
             // visible room sizes and shapes
+            // But we should check that rooms don't get placed on top of each other
+            // (Thanks, Granigan!)
+            // We could perhaps use our own HashSet once it exists to
+            // check whether a room already exists at the given location.
             int roomX = random.nextInt(width - 4) + 2;
             int roomY = random.nextInt(height - 4) + 2;
             PrimNode room = new PrimNode(roomX, roomY, 1, i);
@@ -154,7 +172,7 @@ public class Maze {
     public void runPrim(int start) {
         prim = new Prim(graph, roomNodes, start);
         spanner = prim.buildSpanningTree();
-        /**
+        /*
          * System.out.println("Prim's result:");
          * System.out.println("=============="); int total = 0; for (Edge e :
          * spanner) { System.out.println("E: " + e.a + " -> " + e.b + " : " +
@@ -170,8 +188,6 @@ public class Maze {
      * It first builds the parameters for Astar. The map object must contain the
      * rooms before we can build corridors between then. Also Prim's has to be
      * run first so we have pairs of rooms as a launch node and a target node.
-     *
-     *
      */
     public void runAstar() {
         for (int e = 0; e < spanner.size(); e++) {

@@ -23,7 +23,9 @@ public class PrimNode implements Comparable<PrimNode> {
      *
      * @param x The x coordinate
      * @param y The y coordinate
-     * @param type The maze block type
+     * @param type The maze block type ()
+     * 
+     * @see mazeomatic.ui.MazeScene for block types.
      */
     public PrimNode(int x, int y, int type, int id) {
         this.x = x;

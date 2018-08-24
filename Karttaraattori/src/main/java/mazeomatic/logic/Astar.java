@@ -60,6 +60,38 @@ public class Astar {
      */
     public AstarNode[][] buildShortestPath() {
 
+        initGraph();
+
+        while (!set.contains(target)) {
+            AstarNode u = heap.poll();
+            set.add(u);
+            
+            for (int d = 0; d < X_DIFF.length; d++) {
+                int vX = u.x + X_DIFF[d];
+                int vY = u.y + Y_DIFF[d];
+                // We should make this cleaner looking:
+                // What we're checking here is
+                // 1) we're inside the limits
+                // 2) we're not trying to walk through other rooms
+                // 3) the actual A* condition that have we found a shorter path
+                if ((u.x > 1 && u.x < graph.length-2 && u.y > 1 && u.y < graph[0].length-2)
+                        && graph[vX][vY].type != 1
+                        && graph[vX][vY].distToLaunch > u.distToLaunch + distance(u, graph[vX][vY])) {
+                    heap.remove(graph[vX][vY]);
+                    // Here we will also change this operations once our own implementation
+                    // of the heap contains a decrease key operation
+                    graph[vX][vY].distToLaunch = u.distToLaunch + distance(u, graph[vX][vY]);
+                    path[vX][vY] = u;
+                    heap.add(graph[vX][vY]);
+                }
+            }
+        }
+
+        return path;
+    }
+    
+    
+    private void initGraph() {
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph[0].length; j++) {
                 if (i == launch.x && j == launch.y) {
@@ -71,36 +103,8 @@ public class Astar {
                 heap.add(graph[i][j]);
             }
         }
-        //System.out.println("FROM " + launch.x + ", " + launch.y + " TO " + target.x + ", " + target.y);
-        while (!set.contains(target)) {
-            AstarNode u = heap.poll();
-            //System.out.println("Polled " + u.x + ", " + u.y);
-            //System.out.println("Heap size = " + heap.size());
-            set.add(u);
-            
-            for (int d = 0; d < X_DIFF.length; d++) {
-                int vX = u.x + X_DIFF[d];
-                int vY = u.y + Y_DIFF[d];
-                if ((u.x > 1 && u.x < graph.length-2 && u.y > 1 && u.y < graph[0].length-2)
-                        && graph[vX][vY].type != 1
-                        && graph[vX][vY].distToLaunch > u.distToLaunch + distance(u, graph[vX][vY])) {
-                    heap.remove(graph[vX][vY]);
-                    graph[vX][vY].distToLaunch = u.distToLaunch + distance(u, graph[vX][vY]);
-                    path[vX][vY] = u;
-                    //System.out.println("Added " + vX + ", " + vY + " to path from " + u.x + ", " + u.y);
-                    //System.out.println("In path [" + vX + ", " + vY + "] = "  + path[vX][vY].x + ", " + path[vX][vY].y);
-                    heap.add(graph[vX][vY]);
-                    if (path[vX][vY].id == target.id) {
-                        //System.out.println("Target has been added to path");
-                        //break;
-                    }
-                }
-            }
-        }
 
-        return path;
     }
-    
     
     /**
      * This calculates a Manhattan distance between two nodes
