@@ -6,5 +6,5 @@ Aiheenani harjoitustyössä on karttageneraattori. Karttageneraattori generoi pr
 
 Tarkemmat kuvaukset löytyvät projektin dokumentaatiosta:
 
-[Määrittelydokumentti]()
+[Määrittelydokumentti](karttaraattori/Dokumentaatio/Maarittelydokumentti.md)
 
