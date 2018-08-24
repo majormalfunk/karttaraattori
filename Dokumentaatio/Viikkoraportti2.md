@@ -1,4 +1,4 @@
-Viikkoraportti 2
+## Viikkoraportti 2
 
 Viikolla 2 olen jatkanut sovelluksen työstämistä. Suurin osa ajasta on mennyt alustavan käyttöliittymän tekemiseen, jotta kehittäessä voi testata, että lopputulos näyttää siltä, mikä oli tarkoitus.
 
