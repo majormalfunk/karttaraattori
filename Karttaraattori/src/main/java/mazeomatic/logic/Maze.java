@@ -37,6 +37,8 @@ public class Maze {
     public Astar astar;
 
     public MazeArrayList<Edge> spanner;
+    
+    public MazeArrayList<AstarNode>[] corridors; // Array of MazeArrayLists of corridor nodes. Not in use yet!
 
     /**
      * Constructor
@@ -152,14 +154,6 @@ public class Maze {
                 }
             }
         }
-        /*
-        System.out.println("Proximity list:"); for (int g = 0; g < graph.length; g++) {
-        System.out.print(g + " : ");
-        for (Edge e : graph[g]) {
-          System.out.print(e.a + " > " + e.b + "=" + e.weight + " "); }
-          System.out.print("\n");
-        }
-        */
 
     }
 
@@ -188,6 +182,9 @@ public class Maze {
      * It first builds the parameters for Astar. The map object must contain the
      * rooms before we can build corridors between then. Also Prim's has to be
      * run first so we have pairs of rooms as a launch node and a target node.
+     * 
+     * !!!! We need to fix this so that we can test path lengths individually and
+     * maybe animate the pathfinding on screen if project schedule allows. !!!!
      */
     public void runAstar() {
         for (int e = 0; e < spanner.size(); e++) {
@@ -201,52 +198,57 @@ public class Maze {
             launch.setAsLaunch();
             AstarNode target = new AstarNode(targetX, targetY, 0, ((targetX * map.length) + targetY));
             target.setAsTarget();
-            AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
-            for (int i = 0; i < map.length; i++) {
-                for (int j = 0; j < map[0].length; j++) {
-                    AstarNode node = new AstarNode(i, j, 1, ((i * map.length) + j)); // Impassable
-                    if (map[i][j] == 0 || map[i][j] == 3 // Wall or corridor
-                            || (i >= launchX - 2 && i <= launchX + 2 && j >= launchY - 2 && j <= launchY + 2)
-                            || (i >= targetX - 2 && i <= targetX + 2 && j >= targetY - 2 && j <= targetY + 2)) {
-                        node.type = 0; // Passable
-                    }
-                    astarGraph[i][j] = node;
-                }
-            }
 
+            AstarNode[][] astarGraph = buildGraphForAstar(launchX, launchY, targetX, targetY);
             astar = new Astar(astarGraph, launch, target);
             AstarNode[][] shortestPath = astar.buildShortestPath();
             
-            int x = target.x;
-            int edx = target.x;
-            int y = target.y;
-            int edy = target.y;
-            map[x][y] = 3;
-            while (true) {
-                if (shortestPath[x][y] == null) {
-                    //System.out.println("  - path is null");
-                    break;
-                }
-                if (shortestPath[x][y].x == launch.x && shortestPath[x][y].y == launch.y) {
-                    //System.out.println("  - path reached end");
-                    break;
-                }
-                AstarNode node = shortestPath[x][y];
-                x = node.x;
-                y = node.y;
-                //System.out.println("x=" + x + " y=" + y + " edx=" + edx + " edy=" + edy);
-                if (Math.abs(x - edx) + Math.abs(y - edy) != 1) {
-                    System.out.println("VIRHE! Liikkuu kulmittain x: " + x + " vs " + edx + " y: " + y + " vs " + edy);
-                }
-                //System.out.println("Adding corridor at " + x + ", " + y);
-                map[x][y] = 3;
-                edx = x;
-                edy = y;
-            }
+            traceShortestPathOntoMap(shortestPath, launchX, launchY, targetX, targetY);
             
         }
-        //AstarNode launch
-        //AstarNode target
+
+    }
+    
+    public void traceShortestPathOntoMap(AstarNode[][] shortestPath, int launchX, int launchY, int targetX, int targetY) {
+        int x = targetX;
+        int prevX = targetX;
+        int y = targetY;
+        int prevY = targetY;
+        map[x][y] = 3;
+        while (true) {
+            // We trace the path backwards to extract the shortest path
+            if (shortestPath[x][y] == null) {
+                // The path is null, stop looping
+                break;
+            }
+            if (shortestPath[x][y].x == launchX && shortestPath[x][y].y == launchY) {
+                // The path was traced back to launch pint
+                break;
+            }
+            AstarNode node = shortestPath[x][y];
+            x = node.x;
+            y = node.y;
+            map[x][y] = 3;
+            prevX = x;
+            prevY = y;
+        }
+        
+    }
+    
+    public AstarNode[][] buildGraphForAstar(int launchX, int launchY, int targetX, int targetY) {
+        AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                AstarNode node = new AstarNode(i, j, 1, ((i * map.length) + j)); // Impassable
+                if (map[i][j] == 0 || map[i][j] == 3 // Wall or corridor
+                        || (i >= launchX - 2 && i <= launchX + 2 && j >= launchY - 2 && j <= launchY + 2)
+                        || (i >= targetX - 2 && i <= targetX + 2 && j >= targetY - 2 && j <= targetY + 2)) {
+                    node.type = 0; // Passable
+                }
+                astarGraph[i][j] = node;
+            }
+        }
+        return astarGraph;
     }
 
     /**

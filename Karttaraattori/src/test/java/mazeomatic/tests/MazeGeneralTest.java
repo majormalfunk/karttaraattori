@@ -37,8 +37,6 @@ public class MazeGeneralTest {
 
         MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
-        maze.chooseRoomLocations();
-        maze.placeRoomsInMaze();
         assertEquals(WIDTH, maze.map.length);
     }
 
@@ -46,8 +44,6 @@ public class MazeGeneralTest {
     public void testHeightOfMazeArray() {
         MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
-        maze.chooseRoomLocations();
-        maze.placeRoomsInMaze();
         assertEquals(HEIGHT, maze.map[0].length);
     }
 
@@ -56,12 +52,22 @@ public class MazeGeneralTest {
         MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
-        maze.placeRoomsInMaze();
         assertEquals(ROOMS, maze.roomNodes.length);
     }
 
     @Test
-    public void testToFindRoomsInFinalMap() {
+    public void testToFindOneRoomInMap() {
+        MazeRandom random = new MazeRandomCongruential();
+        maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
+        maze.chooseRoomLocations();
+        PrimNode room2 = new PrimNode(10, 13, 0, 0);
+        maze.roomNodes[2] = room2;
+        maze.placeRoomsInMaze();
+        assertTrue(maze.elementAt(maze.roomNodes[2].x, maze.roomNodes[2].y) == 1);
+    }
+
+    @Test
+    public void testToFindAllRoomsInMap() {
         MazeRandom random = new MazeRandomCongruential();
         maze = new Maze(WIDTH, HEIGHT, ROOMS, random);
         maze.chooseRoomLocations();
@@ -69,6 +75,17 @@ public class MazeGeneralTest {
         for (int t = 0; t < maze.roomNodes.length; t++) {
             assertTrue(maze.elementAt(maze.roomNodes[t].x, maze.roomNodes[t].y) == 1);
         }
+    }
+
+    @Test
+    public void testToNotToFindNonExistentRoomInMap() {
+        MazeRandom random = new MazeRandomCongruential();
+        maze = new Maze(WIDTH, HEIGHT, 1, random);
+        maze.chooseRoomLocations();
+        PrimNode room0 = new PrimNode(10, 13, 0, 0);
+        maze.roomNodes[0] = room0;
+        maze.placeRoomsInMaze();
+        assertFalse(maze.elementAt(3, 3) == 1);
     }
 
     @Test
@@ -150,59 +167,76 @@ public class MazeGeneralTest {
     }
 
     @Test
-    public void testAstar() {
-
-        int[][] map = new int[WIDTH][HEIGHT];
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[0].length; j++) {
-                if (i == 0 || j == 0 || i == map.length - 1 || j == map[0].length - 1) {
-                    map[i][j] = 4; // Maze edges
-                } else {
-                    map[i][j] = 0;
-                }
-            }
-        }
-
-        AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[0].length; j++) {
-                AstarNode node = new AstarNode(i, j, 0, (i * map.length) + j); // Passable
-                astarGraph[i][j] = node;
-            }
-        }
-        AstarNode launch = new AstarNode(3, 3, 0, (3 * map.length) + 3);
-        launch.setAsLaunch();
-        astarGraph[3][3] = launch;
-        AstarNode target = new AstarNode(11, 3, 0, (11 * map.length) + 3);
-        target.setAsTarget();
-        astarGraph[11][3] = target;
-        AstarNode obstacle = new AstarNode(7, 3, 1, (7 * map.length) + 3);
-        astarGraph[7][3] = obstacle;
-
-        //System.out.println("A* graph");
-        //logAstarGraph(astarGraph);
-        Astar astar = new Astar(astarGraph, launch, target);
-        AstarNode[][] shortestPath = astar.buildShortestPath();
-
-        int x = target.x;
-        int y = target.y;
-        map[x][y] = 3;
-        int pathLength = 0;
-        while (true) {
-            if (shortestPath[x][y] == null) {
-                break;
-            }
-            if (shortestPath[x][y].x == launch.x && shortestPath[x][y].y == launch.y) {
-                break;
-            }
-            x = shortestPath[x][y].x;
-            y = shortestPath[x][y].y;
-            map[x][y] = 3;
-            //System.out.println("x:" + x + " y:" + y);
-            pathLength++;
-        }
-        assertEquals(7, pathLength);
+    public void testRunSimpleStraightAstar() {
+        
+        MazeRandom random = new MazeRandomCongruential();
+        maze = new Maze(WIDTH, HEIGHT, 2, random);
+        PrimNode room0 = new PrimNode(2, 2, 0, 0);
+        maze.roomNodes[0] = room0;
+        PrimNode room1 = new PrimNode(2, 9, 0, 1);
+        maze.roomNodes[1] = room1;
+        maze.placeRoomsInMaze();
+        maze.buildGraph();
+        maze.runPrim(0);
+        // We should have a maze with two rooms and one edge
+        maze.runAstar();
+        assertTrue(maze.map[2][2] == 1); // Center
+        assertTrue(maze.map[2][3] == 3); // Corridor (in room)
+        assertTrue(maze.map[2][4] == 3); // Corridor (edge around room)
+        assertTrue(maze.map[2][5] == 3); // Corridor
+        assertTrue(maze.map[2][6] == 3); // Corridor (edge around room)
+        assertTrue(maze.map[2][7] == 3); // Corridor (in room)
+        assertTrue(maze.map[2][8] == 3); // Corridor (center of room)
+        
 
     }
+    
+    @Test
+    public void testRunSimpleObstacledAstar() {
 
+        MazeRandom random = new MazeRandomCongruential();
+        maze = new Maze(WIDTH, HEIGHT, 2, random);
+        PrimNode room0 = new PrimNode(2, 2, 0, 0);
+        maze.roomNodes[0] = room0;
+        PrimNode room1 = new PrimNode(2, 9, 0, 1);
+        maze.roomNodes[1] = room1;
+        maze.placeRoomsInMaze();
+        maze.buildGraph();
+        maze.runPrim(0);
+        // We should have a maze with two rooms and one edge
+        maze.map[0][5] = 4; // Astar should go around this
+        maze.map[1][5] = 4; // Astar should go around this
+        maze.map[2][5] = 4; // Astar should go around this
+        maze.runAstar();
+        // We check only launch, target and obstacle on the way
+        // because her we only care that Astar goes around the obstacle.
+        // We don't know for sure what steps it takes before and after the obstacle.
+        assertTrue(maze.map[2][2] == 1); // Center
+        assertFalse(maze.map[2][5] == 3); // Obstacle
+        assertTrue(maze.map[2][6] == 3); // Corridor (center of room)
+
+    }
+    
+    @Test
+    public void testAstarPathLength() {
+        
+        MazeRandom random = new MazeRandomCongruential();
+        maze = new Maze(WIDTH, HEIGHT, 2, random);
+        PrimNode room0 = new PrimNode(2, 2, 0, 0);
+        maze.roomNodes[0] = room0;
+        PrimNode room1 = new PrimNode(2, 9, 0, 1);
+        maze.roomNodes[1] = room1;
+        maze.placeRoomsInMaze();
+        maze.buildGraph();
+        maze.runPrim(0);
+        // We should have a maze with two rooms and one edge
+        maze.map[0][5] = 4; // Astar should go around this
+        maze.map[1][5] = 4; // Astar should go around this
+        maze.map[2][5] = 4; // Astar should go around this
+
+        /// WORK IN PROGRESS TO TEST PATH LENGTH IN TEST CASES
+            
+
+    }
+    
 }
