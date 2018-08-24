@@ -8,6 +8,8 @@ Tarkemmat kuvaukset löytyvät projektin dokumentaatiosta:
 
 [Määrittelydokumentti](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Maarittelydokumentti.md)
 
+[Toteutusdokumentti](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Toteutusdokumentti.md)
+
 [Testausdokumentti](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Testausdokumentti.md)
 
 ## Viikkoraportit
