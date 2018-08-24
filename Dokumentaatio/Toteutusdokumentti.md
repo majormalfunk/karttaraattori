@@ -17,5 +17,5 @@
 
 ## Puutteet ja parannusehdotukset
 
-### Läheteet
+### Lähteet
 
