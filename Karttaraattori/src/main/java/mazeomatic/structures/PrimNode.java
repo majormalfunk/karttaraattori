@@ -69,5 +69,6 @@ public class PrimNode implements Comparable<PrimNode> {
     public int hashCode() {
         return this.id;
     }
+
     
 }

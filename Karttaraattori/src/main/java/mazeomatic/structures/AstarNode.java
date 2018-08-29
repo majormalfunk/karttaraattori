@@ -25,6 +25,10 @@ public class AstarNode implements Comparable<AstarNode> {
      *
      * @param x The x coordinate
      * @param y The y coordinate
+     * @param type The maze block type ()
+     * @param id Id of the node. Used to identify node e.g. in heap
+     * 
+     * @see mazeomatic.ui.MazeScene for block types.
      */
     public AstarNode(int x, int y, int type, int id) {
         this.x = x;

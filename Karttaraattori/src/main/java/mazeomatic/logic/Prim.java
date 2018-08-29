@@ -69,8 +69,9 @@ public class Prim {
             for (int g = 0; g < graph[u.id].size(); g++) {
                 Edge e = graph[u.id].get(g);
                 if (heap.contains(nodes[e.b]) && e.weight < distance[e.b]) {
-                    // This will change when we implement our minimum heap
-                    // Java's PriorityQueue doesn't have a decrease key command.
+                    // We could implement a decrease key method in the heap but then we'd loose
+                    // generality which allows us to first test with say Strings.
+                    // So we'll leave it like this for now.
                     parent[e.b] = u.id;
                     distance[e.b] = e.weight;
                     heap.remove(nodes[e.b]);

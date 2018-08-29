@@ -77,9 +77,10 @@ public class Astar {
                 if ((u.x > 1 && u.x < graph.length-2 && u.y > 1 && u.y < graph[0].length-2)
                         && graph[vX][vY].type != 1
                         && graph[vX][vY].distToLaunch > u.distToLaunch + distance(u, graph[vX][vY])) {
+                    // We could implement a decrease key method in the heap but then we'd loose
+                    // generality which allows us to first test with say Strings.
+                    // So we'll leave it like this for now.
                     heap.remove(graph[vX][vY]);
-                    // Here we will also change this operations once our own implementation
-                    // of the heap contains a decrease key operation
                     graph[vX][vY].distToLaunch = u.distToLaunch + distance(u, graph[vX][vY]);
                     path[vX][vY] = u;
                     heap.add(graph[vX][vY]);
