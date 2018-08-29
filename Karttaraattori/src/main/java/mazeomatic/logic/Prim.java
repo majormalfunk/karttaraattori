@@ -45,7 +45,7 @@ public class Prim {
         this.distance = new int[nodes.length];
         this.parent = new int[nodes.length];
         this.heap = new PriorityQueue<>();
-
+        
     }
 
     /**

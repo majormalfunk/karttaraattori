@@ -14,9 +14,9 @@ import static org.junit.Assert.*;
  *
  * @author jaakkovilenius
  */
-public class MazeStructuresTest {
+public class MazeArrayListTest {
 
-    public MazeStructuresTest() {
+    public MazeArrayListTest() {
     }
 
     /**
