@@ -60,6 +60,39 @@ public class MazeMinHeap<T extends Comparable<T>> {
         return size;
     }
 
+    public boolean contains(T item) {
+        if (isEmpty()) {
+            return false;
+        }
+        return indexOf(item) != -1;
+    }
+    
+    public boolean remove(T item) {
+        int i = indexOf(item);
+        if (i == -1) {
+            return false;
+        }
+        items[i] = items[size-1];
+        items[size-1] = null;
+        size--;
+        heapify(i);
+        return true;
+    }
+    
+    private int indexOf(T item) {
+        if (isEmpty()) {
+            return -1;
+        }
+        int i = 0;
+        while(i < size) {
+            if (items[i].equals(item)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+    
     public void heapDecKey() {
 
     }
@@ -95,7 +128,7 @@ public class MazeMinHeap<T extends Comparable<T>> {
                 swap(i, smallest);
                 heapify(smallest);
             }
-        } else if (l == items.length && items[i].compareTo(items[l]) > 0) {
+        } else if (l == size-1 && items[i].compareTo(items[l]) > 0) {
             swap(i, l);
         }
 

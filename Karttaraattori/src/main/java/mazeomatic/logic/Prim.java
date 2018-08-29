@@ -8,8 +8,7 @@ package mazeomatic.logic;
 import mazeomatic.structures.Edge;
 import mazeomatic.structures.PrimNode;
 import mazeomatic.structures.MazeArrayList; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
-import java.util.PriorityQueue; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
-
+import mazeomatic.structures.MazeMinHeap;
 /**
  * Implementation of Prim's algorithm
  *
@@ -23,7 +22,7 @@ public class Prim {
 
     int distance[];
     int parent[];
-    PriorityQueue<PrimNode> heap;
+    MazeMinHeap<PrimNode> heap;
 
     /**
      * Constructor for the class
@@ -44,7 +43,7 @@ public class Prim {
 
         this.distance = new int[nodes.length];
         this.parent = new int[nodes.length];
-        this.heap = new PriorityQueue<>();
+        this.heap = new MazeMinHeap<>();
         
     }
 
@@ -70,7 +69,7 @@ public class Prim {
             for (int g = 0; g < graph[u.id].size(); g++) {
                 Edge e = graph[u.id].get(g);
                 if (heap.contains(nodes[e.b]) && e.weight < distance[e.b]) {
-                    // This will change when we implement ou minimum heap
+                    // This will change when we implement our minimum heap
                     // Java's PriorityQueue doesn't have a decrease key command.
                     parent[e.b] = u.id;
                     distance[e.b] = e.weight;

@@ -19,6 +19,7 @@ public class AstarNode implements Comparable<AstarNode> {
     public int distToLaunch;
     public int distToTarget;
     AstarNode path;
+
     /**
      * The constructor
      *
@@ -66,8 +67,6 @@ public class AstarNode implements Comparable<AstarNode> {
 
     @Override
     public int hashCode() {
-        // E.g. x = 9 and y 30 => (x*10^2)+y = 9*100+30 = 930
-        // return (this.x*(10^(String.valueOf(this.y).length())))+this.y;
         return this.id;
     }
 

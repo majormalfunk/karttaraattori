@@ -6,8 +6,8 @@
 package mazeomatic.logic;
 
 import mazeomatic.structures.AstarNode;
+import mazeomatic.structures.MazeMinHeap;
 import java.util.HashSet; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
-import java.util.PriorityQueue; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 
 /**
  * Implementation of A* algorithm
@@ -21,7 +21,7 @@ public class Astar {
     AstarNode target;
     
     AstarNode[][] path;
-    PriorityQueue<AstarNode> heap;
+    MazeMinHeap<AstarNode> heap;
     HashSet<AstarNode> set;
     
     // We use X_DIFF and Y_DIFF when checking horizontally and vertically around the u node.
@@ -48,7 +48,7 @@ public class Astar {
         this.target = target;
 
         this.path = new AstarNode[graph.length][graph[0].length];
-        this.heap = new PriorityQueue<>();
+        this.heap = new MazeMinHeap<>();
         this.set = new HashSet<>();
 
     }

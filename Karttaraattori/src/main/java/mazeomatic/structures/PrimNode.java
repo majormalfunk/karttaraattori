@@ -24,6 +24,7 @@ public class PrimNode implements Comparable<PrimNode> {
      * @param x The x coordinate
      * @param y The y coordinate
      * @param type The maze block type ()
+     * @param id Id of the node. Used to identify node e.g. in heap
      * 
      * @see mazeomatic.ui.MazeScene for block types.
      */
@@ -32,32 +33,41 @@ public class PrimNode implements Comparable<PrimNode> {
         this.y = y;
         this.type = type;
         this.id = id;
+
+    }
+
+    public int getDistance() {
+        return this.distance;
     }
 
     @Override
     public int compareTo(PrimNode o2) {
+        
         if (this.distance < o2.distance) {
             return -1;
         } else if (this.distance > o2.distance) {
             return 1;
         }
         return 0;
+        
     }
 
     @Override
     public boolean equals(Object o) {
+        
         PrimNode n = (PrimNode) o;
-        //System.out.println("Testing equality");
         if (n.id == this.id) {
             return true;
         }
 
         return false;
+        
     }
 
+    
     @Override
     public int hashCode() {
         return this.id;
     }
-
+    
 }
