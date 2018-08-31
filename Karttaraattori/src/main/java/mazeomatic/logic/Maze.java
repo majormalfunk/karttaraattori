@@ -55,11 +55,11 @@ public class Maze {
 
         initMap();
         
-        graph = new MazeArrayList[rooms];
+        this.graph = new MazeArrayList[rooms];
 
         this.random = random;
 
-        roomNodes = new PrimNode[rooms];
+        this.roomNodes = new PrimNode[rooms];
 
     }
     

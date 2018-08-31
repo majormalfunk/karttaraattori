@@ -36,9 +36,9 @@ public class AstarNode implements Comparable<AstarNode> {
         this.y = y;
         this.type = type;
         this.id = id;
-        distToLaunch = Integer.MAX_VALUE;
-        distToTarget = Integer.MAX_VALUE;
-        path = null;
+        this.distToLaunch = Integer.MAX_VALUE;
+        this.distToTarget = Integer.MAX_VALUE;
+        this.path = null;
     }
 
     /**

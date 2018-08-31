@@ -60,19 +60,19 @@ public class Prim {
         
         while (!heap.isEmpty()) {
             // Poll the nearest node from the heap
-            PrimNode u = heap.poll();
+            PrimNode nearestNode = heap.poll();
             // If it already has a parent we add it to the spanning tree
-            if (parent[u.id] != -1) {
-                spanner.add(new Edge(parent[u.id], u.id, distance[u.id]));
+            if (parent[nearestNode.id] != -1) {
+                spanner.add(new Edge(parent[nearestNode.id], nearestNode.id, distance[nearestNode.id]));
             }
             // Then we loop through the nodes on the proximity list
-            for (int g = 0; g < graph[u.id].size(); g++) {
-                Edge e = graph[u.id].get(g);
+            for (int g = 0; g < graph[nearestNode.id].size(); g++) {
+                Edge e = graph[nearestNode.id].get(g);
                 if (heap.contains(nodes[e.b]) && e.weight < distance[e.b]) {
                     // We could implement a decrease key method in the heap but then we'd loose
                     // generality which allows us to first test with say Strings.
                     // So we'll leave it like this for now.
-                    parent[e.b] = u.id;
+                    parent[e.b] = nearestNode.id;
                     distance[e.b] = e.weight;
                     heap.remove(nodes[e.b]);
                     nodes[e.b].distance = distance[e.b];

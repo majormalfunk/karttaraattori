@@ -124,13 +124,16 @@ public class StartScene extends Scene {
     }
 
     /**
-     * Validates the maze size input
+     * Validates the maze size input.
      *
      * @param input
      * @return true if textfield is not null, not empty and contains only
      * numbers and is > 2
      */
     boolean sizeValid(TextField input) {
+        //
+        // WE SHOULD ALSO ADD A MAX SIZE
+        //
         try {
             return parseInput(input) >= Mazeomatic.MIN_SIZE;
         } catch (Exception ex) {
@@ -138,7 +141,17 @@ public class StartScene extends Scene {
         }
     }
 
+    /**
+     * Checks that the number of rooms is valid
+     * 
+     * @param input
+     * @return true if it passes the validity tests false othewise
+     */
     boolean roomsValid(TextField input) {
+        //
+        // WE NEED TO ADD CHECKS ALSO FOR MAX ROOMS
+        // MAYBE WITH A FILL FACTOR CONSIDERING THE MAZE SIZE
+        //
         try {
             return parseInput(input) >= Mazeomatic.MIN_ROOMS;
         } catch (Exception ex) {
@@ -146,6 +159,13 @@ public class StartScene extends Scene {
         }
     }
 
+    /**
+     * This tries to make an int of the text input
+     * 
+     * @param input
+     * @return
+     * @throws Exception 
+     */
     int parseInput(TextField input) throws Exception {
         return Integer.parseInt(input.getText());
     }

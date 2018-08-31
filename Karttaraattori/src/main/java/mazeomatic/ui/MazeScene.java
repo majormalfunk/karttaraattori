@@ -38,10 +38,10 @@ public class MazeScene extends Scene {
 
         final Mazeomatic mazeomatic = mzomtic;
 
-        pane = new Pane();
+        this.pane = new Pane();
         
-        paneWidth = (mazeWidth*BLOCK_SIZE) + 100;
-        paneHeight = (mazeHeight*BLOCK_SIZE) + 100;
+        this.paneWidth = (mazeWidth*BLOCK_SIZE) + 100;
+        this.paneHeight = (mazeHeight*BLOCK_SIZE) + 100;
 
         pane.setPrefSize(paneWidth, paneHeight);
 

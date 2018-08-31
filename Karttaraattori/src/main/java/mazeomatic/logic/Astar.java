@@ -7,7 +7,8 @@ package mazeomatic.logic;
 
 import mazeomatic.structures.AstarNode;
 import mazeomatic.structures.MazeMinHeap;
-import java.util.HashSet; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
+import mazeomatic.structures.MazeHashSet;
+//import java.util.HashSet; // WE NEED TO REPLACE THIS WITH AN IMPLEMENTATION OF OUR OWN
 
 /**
  * Implementation of A* algorithm
@@ -22,9 +23,9 @@ public class Astar {
     
     AstarNode[][] path;
     MazeMinHeap<AstarNode> heap;
-    HashSet<AstarNode> set;
+    MazeHashSet<AstarNode> set;
     
-    // We use X_DIFF and Y_DIFF when checking horizontally and vertically around the u node.
+    // We use X_DIFF and Y_DIFF when checking horizontally and vertically around the currentNode node.
     static final int X_DIFF[] = {0, -1, 1, 0};
     static final int Y_DIFF[] = {-1, 0, 0, 1};
 
@@ -49,40 +50,40 @@ public class Astar {
 
         this.path = new AstarNode[graph.length][graph[0].length];
         this.heap = new MazeMinHeap<>();
-        this.set = new HashSet<>();
+        this.set = new MazeHashSet<>(distance(this.launch, this.target));
 
     }
 
     /**
      * This builds the shortest path using A* algorithm.
      *
-     * @return An ArrayList of the edges making up the shortest
+     * @return An ArrayList of the edges making up the shortest path
      */
     public AstarNode[][] buildShortestPath() {
 
         initGraph();
 
         while (!set.contains(target)) {
-            AstarNode u = heap.poll();
-            set.add(u);
+            AstarNode currentNode = heap.poll();
+            set.add(currentNode);
             
             for (int d = 0; d < X_DIFF.length; d++) {
-                int vX = u.x + X_DIFF[d];
-                int vY = u.y + Y_DIFF[d];
+                int vX = currentNode.x + X_DIFF[d];
+                int vY = currentNode.y + Y_DIFF[d];
                 // We should make this cleaner looking:
                 // What we're checking here is
                 // 1) we're inside the limits
                 // 2) we're not trying to walk through other rooms
                 // 3) the actual A* condition that have we found a shorter path
-                if ((u.x > 1 && u.x < graph.length-2 && u.y > 1 && u.y < graph[0].length-2)
+                if ((currentNode.x > 1 && currentNode.x < graph.length-2 && currentNode.y > 1 && currentNode.y < graph[0].length-2)
                         && graph[vX][vY].type != 1
-                        && graph[vX][vY].distToLaunch > u.distToLaunch + distance(u, graph[vX][vY])) {
+                        && graph[vX][vY].distToLaunch > currentNode.distToLaunch + distance(currentNode, graph[vX][vY])) {
                     // We could implement a decrease key method in the heap but then we'd loose
                     // generality which allows us to first test with say Strings.
                     // So we'll leave it like this for now.
                     heap.remove(graph[vX][vY]);
-                    graph[vX][vY].distToLaunch = u.distToLaunch + distance(u, graph[vX][vY]);
-                    path[vX][vY] = u;
+                    graph[vX][vY].distToLaunch = currentNode.distToLaunch + distance(currentNode, graph[vX][vY]);
+                    path[vX][vY] = currentNode;
                     heap.add(graph[vX][vY]);
                 }
             }

@@ -5,7 +5,7 @@
  */
 package mazeomatic.structures;
 
-import java.util.Arrays;
+//import java.util.Arrays;
 
 /**
  * This is an implementation of a minimum heap or a priority queue. It
@@ -140,10 +140,14 @@ public class MazeMinHeap<T extends Comparable<T>> {
 
     /**
      * This adds capacity to the heap. It is called when the number of elements
-     * int the heap's inner array reach maximum.
+     * in the heap's inner array reach maximum.
      */
     private void addCapacity() {
-        items = Arrays.copyOf(items, items.length * 2);
+        T[] newItems = (T[]) new Comparable[this.items.length * 2];
+        System.arraycopy(this.items, 0, newItems, 0, this.items.length);
+        this.items = newItems;
+
+//        items = Arrays.copyOf(items, items.length * 2);
     }
 
     /**
