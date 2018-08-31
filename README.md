@@ -24,3 +24,5 @@ Tarkemmat kuvaukset löytyvät projektin dokumentaatiosta:
 
 [Viikkoraportti 5](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti5.md)
 
+[Viikkoraportti 6](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti6.md)
+
