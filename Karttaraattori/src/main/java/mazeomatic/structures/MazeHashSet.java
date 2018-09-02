@@ -60,6 +60,7 @@ public class MazeHashSet<T> {
             return false;
         } else if (!contains(item)) {
             items[hash].add(item);
+            counter++;
             return true;
         }
         return false;
@@ -84,13 +85,34 @@ public class MazeHashSet<T> {
         }
         return false;
     }
+    
+    /**
+     * Removes an item from this set.
+     * @param item
+     * @return True if item existed in this set.
+     */
+    public boolean remove(T item) {
+        int hash = hashValue(item);
+        if (items[hash] == null) {
+            return false;
+        }
+        MazeArrayList<T> nodes = items[hash];
+        for (int i = 0; i < nodes.size(); i++) {
+            if (nodes.get(i).equals(item)) {
+                nodes.remove(i);
+                counter--;
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * This adds capacity to the set. At this point it just doubles the
-     * capacity and adjusta the hash function accordingly
+     * capacity and adjusts the hash function accordingly
      */
     private void addCapacity() {
-        //System.out.println("Adding capacity from " + maxLists);
+        System.out.println("Adding capacity from " + maxLists);
         maxLists *= 2;
         MazeArrayList<T>[] newItems = new MazeArrayList[items.length * 2];
         for (int i = 0; i < items.length; i++) {
@@ -129,6 +151,14 @@ public class MazeHashSet<T> {
                 newItems[hash].add(item);
             }
         }
+    }
+    
+    /**
+     * Returns the number of items in this set.
+     * @return number of items in this set.
+     */
+    public int size() {
+        return counter;
     }
 
 }

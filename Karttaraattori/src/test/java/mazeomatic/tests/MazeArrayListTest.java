@@ -143,6 +143,22 @@ public class MazeArrayListTest {
         testMazeArrayListSize(list, items);
 
     }
+    
+    @Test
+    public void testMazeArrayListWithMoreItems4() {
+        int lot = 500;
+        MazeArrayList<String> list = new MazeArrayList();
+        for (int i = 0; i < lot; i++) {
+            list.add("TEST" + i);
+        }
+        assertEquals(lot, list.size());
+        for (int i = 499; i > 0; i--) {
+            list.remove("TEST" + i);
+        }
+        assertEquals(1, list.size());
+        
+
+    }
 
     /**
      * Test exceptions exception when adding with wrong index
