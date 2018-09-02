@@ -5,7 +5,7 @@
 Sovellus on toteutettu JavaFX:llä. Siinä on tällä hetkellä 2 näkymää. Ensimmäisessä annetaan käynnistysparametrit ja toisessa näytetään muodostettu kartta. Tavoitteena olisi yhdistää näkymät siten, että parametreja voi muuttaa ja kartan luomisen voi käynnistää uudestaan.
 
 
-Käynnistysparametreina kysytään kartan leveys ja korkeus karttaruutuina sekä huoneiden lukumäärä. Yksi karttaruutu vastaa käytävän leveyttä. Huoneet ovat 3x3 karttaruutua. Kartalla on minimikoko ja minimi huonelukumäärä. Siihen pitäisi lisätä myös maksimikoko sekä mahdollisesti vaihtaa huoneiden lukumääränä annettava parametri täyttöasteeksi tms.
+Käynnistysparametreina kysytään kartan leveys ja korkeus karttaruutuina sekä huoneiden lukumäärä. Yksi karttaruutu vastaa käytävän leveyttä. Huoneet ovat 3x3 karttaruutua. Kartalla on minimikoko ja minimi huonelukumäärä. Käynnistysparametrien tarkistukseen pitäisi lisätä myös ainakin huoneiden lukumäärän järkevyystarkastus suhteessa kartan kokoon sekä mahdollisesti vaihtaa huoneiden lukumääränä annettava parametri täyttöasteeksi tms.
 
 
 Itse kartan luominen tapahtuu seuraavassa järjestyksessä:
