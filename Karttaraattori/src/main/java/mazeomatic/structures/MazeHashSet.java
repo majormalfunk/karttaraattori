@@ -16,7 +16,7 @@ package mazeomatic.structures;
  */
 public class MazeHashSet<T> {
 
-    private final static int INITIAL_LIST_LENGTH = 22;
+    private final static int INITIAL_LIST_LENGTH = 101;
     private MazeArrayList<T>[] items;
     private int counter; // Count of lists in use
     //private int modder; // A variable which we take the modulus with
@@ -112,14 +112,14 @@ public class MazeHashSet<T> {
      * capacity and adjusts the hash function accordingly
      */
     private void addCapacity() {
-        System.out.println("Adding capacity from " + maxLists);
+        //System.out.println("Adding capacity from " + maxLists);
         maxLists *= 2;
         MazeArrayList<T>[] newItems = new MazeArrayList[items.length * 2];
         for (int i = 0; i < items.length; i++) {
             copyArray(newItems, i);
         }
         items = newItems;
-        System.out.println("                  to " + maxLists);
+        //System.out.println("                  to " + maxLists);
     }
 
     /**

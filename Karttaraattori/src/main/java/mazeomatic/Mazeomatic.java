@@ -18,6 +18,7 @@ public class Mazeomatic extends Application {
 
     public boolean stopLoop;
     public boolean parametersSet;
+    private boolean redo;
     public int mazeWidth;
     public int mazeHeight;
     public int rooms;
@@ -33,6 +34,7 @@ public class Mazeomatic extends Application {
 
         stopLoop = false;
         parametersSet = false;
+        redo = false;
         mazeWidth = 0;
         mazeHeight = 0;
         rooms = 0;
@@ -42,9 +44,7 @@ public class Mazeomatic extends Application {
         root = new Group();
         this.stage = stage;
         stage.setTitle("Karttaraattori");
-        StartScene startScene = new StartScene(root, this);
-        stage.setScene(startScene);
-        stage.show();
+        showStartScene();
 
         try {
 
@@ -60,6 +60,7 @@ public class Mazeomatic extends Application {
                         // Handle application control here
                         if (!parametersSet) {
                             if (mazeWidth != 0 && mazeHeight != 0) {
+                                redo = false;
                                 parametersSet = true;
                                 System.out.println("Parameters set correctly!");
                                 makeMaze();
@@ -69,10 +70,13 @@ public class Mazeomatic extends Application {
                                 runPrim();
                                 runAstar();
                                 showMaze();
-                                stop();
-
+                                //stop();
                             }
                         }
+                        if (redo) {
+                            showStartScene();
+                        }
+                        
                     }
 
                 }
@@ -84,7 +88,22 @@ public class Mazeomatic extends Application {
         }
 
     }
-
+    
+    public void resetParameters() {
+        mazeWidth = 0;
+        mazeHeight = 0;
+        rooms = 0;
+        parametersSet = false;
+        redo = true;
+    }
+    
+    private void showStartScene() {
+        redo = false;
+        StartScene startScene = new StartScene(root, this);
+        stage.setScene(startScene);
+        stage.show();
+    }
+    
     /**
      * Calls the constructor of the Maze class
      */
