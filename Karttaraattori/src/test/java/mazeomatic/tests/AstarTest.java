@@ -103,7 +103,7 @@ public class AstarTest {
 
     @Test
     public void testAstarPermformance() {
-        //testAstarPerformanceNaive1();
+        //testAstarPerformance1();
     }
 
     public void testAstarPerformance1() {
@@ -113,7 +113,7 @@ public class AstarTest {
             long average = 0;
             long repeats = 10;
             for (int rep = 1; rep <= repeats; rep++) { // repeats for dimension
-            maze = new Maze(size, size, 2, random);
+                maze = new Maze(size, size, 2, random);
                 PrimNode room0 = new PrimNode(10, 10, 0, 0);
                 maze.roomNodes[0] = room0;
                 PrimNode room1 = new PrimNode(88, 88 - 11, 0, 1);
@@ -121,6 +121,9 @@ public class AstarTest {
                 maze.placeRoomsInMaze();
                 maze.buildGraph();
                 maze.runPrim(0);
+                for (int wall = 30; wall < 60; wall++) {
+                    maze.map[50][wall] = 4;
+                }
                 long start = System.currentTimeMillis();
                 maze.runAstar();
                 long end = System.currentTimeMillis();

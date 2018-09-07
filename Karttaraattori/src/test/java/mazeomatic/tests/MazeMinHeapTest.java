@@ -25,6 +25,25 @@ public class MazeMinHeapTest {
         MazeMinHeap<String> heap = new MazeMinHeap<>();
         testMazeMinHeapEmptiness(heap, true);
     }
+
+    @Test
+    public void testMazweMinHeapAddNull() {
+        MazeMinHeap<String> heap = new MazeMinHeap<>();
+        heap.add(null);
+        testMazeMinHeapSize(heap, 0);
+    }
+    
+    @Test
+    public void testMinHeapPollEmptyHeap() {
+        MazeMinHeap<String> heap = new MazeMinHeap<>();
+        assertTrue(heap.poll() == null);
+    }
+
+    @Test
+    public void testRemoveFromEmptyHeap() {
+        MazeMinHeap<String> heap = new MazeMinHeap<>();
+        assertFalse(heap.remove("THIS"));
+    }
     
     @Test
     public void testMazeMinHeapAddOneString() {
@@ -43,7 +62,7 @@ public class MazeMinHeapTest {
         heap.add("DEF");
         testMazeMinHeapSize(heap, 2);
     }
-    
+
     @Test
     public void testMazeMinHeapPollCorrectString1() {
         //System.out.println("*** testMazeMinHeapPollCorrectString1 ***");
@@ -73,7 +92,7 @@ public class MazeMinHeapTest {
     public void testMazeMinHeapSize(MazeMinHeap heap, int expectedSize) {
         assertEquals(expectedSize, heap.size());
     }
-    
+
     public void testMazeMinHeapPoll(MazeMinHeap heap, Object o) {
         assertTrue(heap.poll().equals(o));
     }

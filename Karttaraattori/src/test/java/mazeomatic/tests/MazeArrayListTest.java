@@ -56,6 +56,12 @@ public class MazeArrayListTest {
         testMazeArrayListIndexOf(list, null, 1);
 
     }
+    
+    @Test
+    public void testMazeArrayListWithNonExistentItem() {
+        MazeArrayList<String> list = new MazeArrayList();
+        assertFalse(list.contains("MAZE"));
+    }
 
     /**
      * Testing MazeArrayList with more items - create new list - add several
@@ -156,8 +162,17 @@ public class MazeArrayListTest {
             list.remove("TEST" + i);
         }
         assertEquals(1, list.size());
-        
-
+    }
+    
+    @Test
+    public void testMazeArrayListAddingAtIndex() {
+        int lot = 500;
+        MazeArrayList<String> list = new MazeArrayList();
+        list.add("TEST0");
+        for (int i = 0; i < lot; i++) {
+            list.add(i, "TEST" + i);
+        }
+        assertEquals(501, list.size());
     }
 
     /**
@@ -171,6 +186,16 @@ public class MazeArrayListTest {
     }
 
     /**
+     * Test exceptions exception when adding with wrong index
+     */
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void TestMazeArrayListAddException2() {
+        MazeArrayList<Edge> list = new MazeArrayList();
+        Edge object = new Edge(0, 1, 1);
+        list.add(-1, object);
+    }
+
+    /**
      * Test exceptions exception when removing with wrong index
      */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
@@ -180,12 +205,30 @@ public class MazeArrayListTest {
     }
 
     /**
+     * Test exceptions exception when removing with wrong index
+     */
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void TestMazeArrayListRemoveException2() {
+        MazeArrayList<Edge> list = new MazeArrayList();
+        list.remove(-1);
+    }
+
+    /**
      * Test exceptions exception when getting with wrong index
      */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void TestMazeArrayListGetException() {
         MazeArrayList<Edge> list = new MazeArrayList();
         list.get(list.size() + 1);
+    }
+
+    /**
+     * Test exceptions exception when getting with wrong index
+     */
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void TestMazeArrayListGetException2() {
+        MazeArrayList<Edge> list = new MazeArrayList();
+        list.get(-1);
     }
 
     public void testMazeArrayListSize(MazeArrayList list, int expectedSize) {
