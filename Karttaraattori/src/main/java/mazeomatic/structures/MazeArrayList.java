@@ -18,7 +18,7 @@ package mazeomatic.structures;
  */
 public class MazeArrayList<T> {
     
-    private static final int INITIAL_CAPACITY = 200;
+    private static final int INITIAL_CAPACITY = 100;
     private T[] items;
     private int counter;
     

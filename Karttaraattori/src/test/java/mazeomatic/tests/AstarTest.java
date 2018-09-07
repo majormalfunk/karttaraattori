@@ -106,8 +106,8 @@ public class AstarTest {
         //testAstarPerformanceNaive1();
     }
 
-    public void testAstarPerformanceNaive1() {
-        System.out.println("Testing A* performance in a naive way:");
+    public void testAstarPerformance1() {
+        System.out.println("Testing A* performance:");
         MazeRandom random = new MazeRandomCongruential();
         for (int size = 100; size <= 2000; size += 100) { // Side length of maze
             long average = 0;

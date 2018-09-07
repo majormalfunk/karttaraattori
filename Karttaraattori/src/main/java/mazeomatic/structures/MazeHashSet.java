@@ -16,7 +16,7 @@ package mazeomatic.structures;
  */
 public class MazeHashSet<T> {
 
-    private final static int INITIAL_LIST_LENGTH = 3001;
+    private final static int INITIAL_LIST_LENGTH = 113;
     private MazeArrayList<T>[] items;
     private int counter; // Count of lists in use
     //private int modder; // A variable which we take the modulus with
