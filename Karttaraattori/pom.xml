@@ -4,7 +4,7 @@
 
     <groupId>Karttaraattori</groupId>
     <artifactId>Karttaraattori</artifactId>
-    <version>0.1</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>Karttaraattori</name>
