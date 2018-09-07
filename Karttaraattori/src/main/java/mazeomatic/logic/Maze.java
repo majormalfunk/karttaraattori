@@ -38,7 +38,7 @@ public class Maze {
 
     public MazeArrayList<Edge> spanner;
     
-    public MazeArrayList<AstarNode>[] corridors; // Array of MazeArrayLists of corridor nodes. Not in use yet!
+    public MazeArrayList<AstarNode> corridors; // MazeArrayList of corridor nodes. Not in use yet!
 
     /**
      * Constructor
@@ -60,6 +60,7 @@ public class Maze {
         this.random = random;
 
         this.roomNodes = new PrimNode[rooms];
+        this.corridors = new MazeArrayList<>();
 
     }
     
@@ -210,6 +211,7 @@ public class Maze {
     }
     
     public void traceShortestPathOntoMap(AstarNode[][] shortestPath, int launchX, int launchY, int targetX, int targetY) {
+        // We also add the corridors to corridors list
         int x = targetX;
         int prevX = targetX;
         int y = targetY;
@@ -222,10 +224,13 @@ public class Maze {
                 break;
             }
             if (shortestPath[x][y].x == launchX && shortestPath[x][y].y == launchY) {
-                // The path was traced back to launch pint
+                // The path was traced back to launch point
                 break;
             }
             AstarNode node = shortestPath[x][y];
+            // We also add the corridors to the corridors list
+            // for a later reference to the corridors
+            corridors.add(node);
             x = node.x;
             y = node.y;
             map[x][y] = 3;

@@ -16,7 +16,7 @@ package mazeomatic.structures;
  */
 public class MazeMinHeap<T extends Comparable<T>> {
 
-    private static final int INITIAL_CAPACITY = 20;
+    private static final int INITIAL_CAPACITY = 2100;
     private T[] items;
     private int size;
 

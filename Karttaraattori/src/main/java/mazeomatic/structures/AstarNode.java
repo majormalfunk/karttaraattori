@@ -99,5 +99,10 @@ public class AstarNode implements Comparable<AstarNode> {
     public int hashCode() {
         return this.id;
     }
+    
+    @Override
+    public String toString() {
+        return (this.id + " @ (" + this.x + "," + this.y + ")");
+    }
 
 }
