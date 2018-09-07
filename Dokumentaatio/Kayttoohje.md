@@ -1,6 +1,6 @@
 ## Käyttöohje
 
-Lataa tiedosto (Karttaraattori-1.0.jar)[https://github.com/majormalfunk/karttaraattori/releases/tag/REL1]
+Lataa tiedosto [Karttaraattori-1.0.jar](https://github.com/majormalfunk/karttaraattori/releases/tag/REL1)
 
 ### Ohjelman käynnistäminen
 
