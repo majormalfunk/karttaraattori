@@ -12,6 +12,8 @@ Tarkemmat kuvaukset löytyvät projektin dokumentaatiosta:
 
 [Testausdokumentti](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Testausdokumentti.md)
 
+[Käyttöohje](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Kayttoohje.md)
+
 ## Viikkoraportit
 
 [Viikkoraportti 1](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti1.md)
@@ -26,3 +28,4 @@ Tarkemmat kuvaukset löytyvät projektin dokumentaatiosta:
 
 [Viikkoraportti 6](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti6.md)
 
+[Viikkoraportti 7](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Viikkoraportti7.md)
