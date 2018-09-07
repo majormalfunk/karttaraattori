@@ -5,7 +5,7 @@
 Sovellus on toteutettu JavaFX:llä. Siinä on tällä hetkellä 2 näkymää. Ensimmäisessä annetaan käynnistysparametrit ja toisessa näytetään muodostettu kartta. Tavoitteena olisi yhdistää näkymät siten, että parametreja voi muuttaa ja kartan luomisen voi käynnistää uudestaan.
 
 
-Käynnistysparametreina kysytään kartan leveys ja korkeus karttaruutuina sekä huoneiden lukumäärä. Yksi karttaruutu vastaa käytävän leveyttä. Huoneet ovat 3x3 karttaruutua. Kartalla on minimikoko ja minimi huonelukumäärä. Käynnistysparametrien tarkistukseen pitäisi lisätä myös ainakin huoneiden lukumäärän järkevyystarkastus suhteessa kartan kokoon sekä mahdollisesti vaihtaa huoneiden lukumääränä annettava parametri täyttöasteeksi tms.
+Käynnistysparametreina kysytään kartan leveys ja korkeus karttaruutuina sekä huoneiden lukumäärä. Yksi karttaruutu vastaa käytävän leveyttä. Huoneet ovat 3x3 karttaruutua. Kartalla on minimikoko ja minimi huonelukumäärä. Käynnistysparametrit tarkistetaan minimiarvojen osalta. Muita tarkistuksia ei ole eikä käyttötestauksessa havaittu ohjelman kaatumista tai virheellistä toimintaa erilaisilla ei-järkevillä käynnistysparametreilla.
 
 
 Itse kartan luominen tapahtuu seuraavassa järjestyksessä:
@@ -24,7 +24,7 @@ Itse kartan luominen tapahtuu seuraavassa järjestyksessä:
 
 ## Saavutetut aika- ja tilavaativuudet
 
-Testit ovat vielä kesken
+Suorituskykytestien tulokset löytyvät testausdokumentista.
 
 ### Prim
 
@@ -36,7 +36,13 @@ Myös A* algoritmin toteutus noudattelee Tietorakenteet ja algoritmit kurssilla 
 
 ### Kokonaisuus
 
+Koko sovellukselle ei ajettu erikseen suorituskykytestejä.
+
 ## Puutteet ja parannusehdotukset
+
+Tässä toteutuksessa generoitua karttaa ei saa vietyä ulos järjestelmästä, mutta kartan kirjoittaminen esim 2D-taulukkona tiedostoon siten, että eri numeroilla tai merkeillä ilmaistaisiin onko huone, käytävä vai seinä ei olisi iso työ.
+Sovellusta voisi kehittää niin, että huoneiden lukumäärän sijaan valittaisiin esim täyttöaste.
+Jos haluttaisiin havainnollistaa paremmin algoritmien toimintaa, niin solloin ohjelmaan voitaisiin kehittää toiminnallisuus, jolla virittävän puun rakentaminen ja käytävien hakeminen voisi näyttää haluttaessa animoituna.
 
 ### Lähteet
 
