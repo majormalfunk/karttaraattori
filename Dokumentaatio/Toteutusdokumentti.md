@@ -44,5 +44,3 @@ Tässä toteutuksessa generoitua karttaa ei saa vietyä ulos järjestelmästä, 
 Sovellusta voisi kehittää niin, että huoneiden lukumäärän sijaan valittaisiin esim täyttöaste.
 Jos haluttaisiin havainnollistaa paremmin algoritmien toimintaa, niin silloin ohjelmaan voitaisiin kehittää toiminnallisuus, jolla virittävän puun rakentaminen ja käytävien hakeminen voisi näyttää haluttaessa animoituna.
 
-### Lähteet
-
