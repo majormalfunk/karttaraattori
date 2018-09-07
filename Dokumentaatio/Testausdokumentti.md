@@ -43,6 +43,6 @@ Arvo *V* kuvaa kaikkia kartan ruutuja eli A* osalta kaikkia mahdollisia sijainte
 ![alt text](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/SuorituskykyAStarArvot.png "A* suorituskykytestit")
 ![alt text](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/SuorituskykyAStarKuvaajat.png "A* suorituskykytestit")
 
-A* kuvaajasta nähdään merkittävä ero pahimman tapauksen aikavaativuuden ja itsetoteutetun välillä itsetoteutetun hyväksi. Suorituskykytesti on tehty siten, että jokaisella ajokerralla reitti oli diagonaalinen ilman esteitä, joten pahin tapaus ei luonnollisestikaan pääse tapahtumaan.
+A* kuvaajasta nähdään merkittävä ero pahimman tapauksen aikavaativuuden ja itsetoteutetun välillä itsetoteutetun hyväksi. Suorituskykytesti on tehty siten, että jokaisella ajokerralla reitti oli diagonaalinen ilman esteitä, joten pahin tapaus ei luonnollisestikaan pääse tapahtumaan. Siinä mielessä suorituskykytesti antaa liian hyvän kuvan.
 
 
