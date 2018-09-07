@@ -24,7 +24,7 @@ Itse kartan luominen tapahtuu seuraavassa järjestyksessä:
 
 ## Saavutetut aika- ja tilavaativuudet
 
-Suorituskykytestien tulokset löytyvät testausdokumentista.
+Suorituskykytestien tulokset löytyvät testausdokumentista.https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Testausdokumentti.md
 
 ### Prim
 
@@ -42,7 +42,7 @@ Koko sovellukselle ei ajettu erikseen suorituskykytestejä.
 
 Tässä toteutuksessa generoitua karttaa ei saa vietyä ulos järjestelmästä, mutta kartan kirjoittaminen esim 2D-taulukkona tiedostoon siten, että eri numeroilla tai merkeillä ilmaistaisiin onko huone, käytävä vai seinä ei olisi iso työ.
 Sovellusta voisi kehittää niin, että huoneiden lukumäärän sijaan valittaisiin esim täyttöaste.
-Jos haluttaisiin havainnollistaa paremmin algoritmien toimintaa, niin solloin ohjelmaan voitaisiin kehittää toiminnallisuus, jolla virittävän puun rakentaminen ja käytävien hakeminen voisi näyttää haluttaessa animoituna.
+Jos haluttaisiin havainnollistaa paremmin algoritmien toimintaa, niin silloin ohjelmaan voitaisiin kehittää toiminnallisuus, jolla virittävän puun rakentaminen ja käytävien hakeminen voisi näyttää haluttaessa animoituna.
 
 ### Lähteet
 
