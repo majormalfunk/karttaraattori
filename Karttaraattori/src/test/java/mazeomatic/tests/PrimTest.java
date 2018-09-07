@@ -71,7 +71,6 @@ public class PrimTest {
         maze.placeRoomsInMaze();
         maze.buildGraph();
         maze.runPrim(0);
-        //        int total = 0;
         for (int i = 0; i < maze.spanner.size(); i++) {
             Edge e = maze.spanner.get(i);
             System.out.println("E: " + e.a + " -> " + e.b + " : " + e.weight);
@@ -90,9 +89,16 @@ public class PrimTest {
     
     @Test
     public void testPrimPerformance() {
-        testPrimPerformance1(); // So we can comment it out easily when not wanted 
+        //testPrimPerformance1(); // So we can comment it out easily when not wanted 
     }
     
+    /**
+     * Here we do a performance test. We do 10 runs on each parameter set
+     * and take an average of the runtime for the 10 runs.
+     * We start with 100 vertices which means there are 9900 edges.
+     * Then we increment the vertice count by 100 until 2000 vertices and
+     * 3998000 edges. If there are n vertices, then there are n-1 edges per vertice.
+     */
     private void testPrimPerformance1() {
         int repeats = 10;
         System.out.println("TESTING PRIM PERFORMANCE:");

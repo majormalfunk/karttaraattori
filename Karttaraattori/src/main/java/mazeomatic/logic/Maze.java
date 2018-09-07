@@ -231,6 +231,7 @@ public class Maze {
             // We also add the corridors to the corridors list
             // for a later reference to the corridors
             corridors.add(node);
+            //System.out.println("Corridors size " + corridors.size());
             x = node.x;
             y = node.y;
             map[x][y] = 3;
