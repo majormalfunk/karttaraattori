@@ -24,7 +24,7 @@ Itse kartan luominen tapahtuu seuraavassa järjestyksessä:
 
 ## Saavutetut aika- ja tilavaativuudet
 
-Suorituskykytestien tulokset löytyvät testausdokumentista.https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Testausdokumentti.md
+Suorituskykytestien tulokset löytyvät [testausdokumentista](https://github.com/majormalfunk/karttaraattori/blob/master/Dokumentaatio/Testausdokumentti.md).
 
 ### Prim
 
