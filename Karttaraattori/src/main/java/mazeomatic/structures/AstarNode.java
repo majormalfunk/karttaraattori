@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.structures;
 
 /**
@@ -60,7 +59,7 @@ public class AstarNode implements Comparable<AstarNode> {
      * type
      *
      * @param o2 another instance of the same type
-     * @return
+     * @return -1 if this node should be before the compared node, 1 if after and 0 if no difference
      */
     @Override
     public int compareTo(AstarNode o2) {
@@ -77,7 +76,7 @@ public class AstarNode implements Comparable<AstarNode> {
      * instance is equal to another instance ot the same type.
      *
      * @param o another object
-     * @return
+     * @return true if nodes are equal, false otherwise
      */
     @Override
     public boolean equals(Object o) {
@@ -100,6 +99,10 @@ public class AstarNode implements Comparable<AstarNode> {
         return this.id;
     }
     
+    /**
+     * A string representation of this object
+     * @return A String
+     */
     @Override
     public String toString() {
         return (this.id + " @ (" + this.x + "," + this.y + ")");

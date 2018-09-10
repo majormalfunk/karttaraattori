@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.structures;
 
 /**
@@ -49,7 +48,7 @@ public class PrimNode implements Comparable<PrimNode> {
     /**
      * Setter for distance
      *
-     * @param distance
+     * @param distance the distance to be set
      */
     public void setDistance(int distance) {
         this.distance = distance;
@@ -60,7 +59,7 @@ public class PrimNode implements Comparable<PrimNode> {
      * type
      *
      * @param o2 another instance of the same type
-     * @return
+     * @return -1 if this preceedes the other node 1 if the otherway round. 0 if equal
      */
     @Override
     public int compareTo(PrimNode o2) {
@@ -79,7 +78,7 @@ public class PrimNode implements Comparable<PrimNode> {
      * instance is equal to another instance ot the same type.
      *
      * @param o another object
-     * @return
+     * @return true if this equals the other object, false otherwise
      */
     @Override
     public boolean equals(Object o) {

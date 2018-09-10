@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.logic;
 
 import mazeomatic.structures.Edge;
@@ -32,8 +31,8 @@ public class Prim {
      * @param start The starting node from which to start building the spanning
      * tree
      *
-     * @see mazeomatic.logic.Edge
-     * @see mazeomatic.logic.PrimNode
+     * @see mazeomatic.structures.Edge
+     * @see mazeomatic.structures.PrimNode
      */
     public Prim(MazeArrayList<Edge>[] graph, PrimNode[] nodes, int start) {
 
@@ -84,6 +83,9 @@ public class Prim {
         return spanner;
     }
     
+    /**
+     * This initializes lists for Prim to use
+     */
     private void initArrays() {
         // Set all nodes' distance value to MAX and
         // distance array values to MAX and
@@ -97,6 +99,9 @@ public class Prim {
         distance[start] = 0;
     }
     
+    /**
+     * This adds all nodes in nodes list to the heap
+     */
     private void addNodesToHeap() {
         // Add all nodes to heap
         for (int n = 0; n < nodes.length; n++) {

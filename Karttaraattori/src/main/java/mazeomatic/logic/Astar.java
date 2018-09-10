@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.logic;
 
 import mazeomatic.structures.AstarNode;
@@ -91,6 +90,9 @@ public class Astar {
         return path;
     }
 
+    /**
+     * This initializes the graph for A*. It sets the default values for the beginning in a 2D array
+     */
     private void initGraph() {
         //long start = System.currentTimeMillis();
         for (int i = 0; i < graph.length; i++) {

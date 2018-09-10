@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.structures;
 
 /**
- *
+ * This represents an edge between nodes
  * @author jaakkovilenius
  */
 public class Edge {
@@ -15,6 +14,12 @@ public class Edge {
     public int b;
     public int weight;
 
+    /**
+     * Constructor
+     * @param a first node
+     * @param b second node
+     * @param weight weight of the edge
+     */
     public Edge(int a, int b, int weight) {
         this.a = a;
         this.b = b;

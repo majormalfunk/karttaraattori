@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.structures;
 
 /**
- * Class to cfeate pseudorandom numbers for placing rooms in the map.
+ * Class to create pseudorandom numbers for placing rooms in the map.
  * This follows the Microsoft implementation at: https://rosettacode.org/wiki/Linear_congruential_generator
  * 
  * @author jaakkovilenius
@@ -18,7 +17,9 @@ public class MazeRandomCongruential implements MazeRandom {
     final static long ADDER = 2531011;
     final static long DIVIDER = 65536;
     
-    
+    /**
+     * Constructor
+     */
     public MazeRandomCongruential() {
         
         seed = System.currentTimeMillis();
@@ -26,6 +27,11 @@ public class MazeRandomCongruential implements MazeRandom {
         
     }
 
+    /**
+     * Return the next int with excluded upper boundary
+     * @param n upper boundary
+     * @return new randow int
+     */
     @Override
     public int nextInt(int n) {
         

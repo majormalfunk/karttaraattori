@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.logic;
 
 import mazeomatic.structures.Edge;
@@ -210,6 +209,14 @@ public class Maze {
 
     }
     
+    /**
+     * This traces the spanning tree by Prim on to the map
+     * @param shortestPath Graph of Astar nodes
+     * @param launchX x-coordinate of starting point
+     * @param launchY y-coordinate of starting point
+     * @param targetX x-coordinate of ending point
+     * @param targetY y-coordinate of ending point
+     */
     public void traceShortestPathOntoMap(AstarNode[][] shortestPath, int launchX, int launchY, int targetX, int targetY) {
         // We also add the corridors to corridors list
         int x = targetX;
@@ -241,6 +248,14 @@ public class Maze {
         
     }
     
+    /**
+     * This builds the graph for A* to use
+     * @param launchX x-coordinate of starting point
+     * @param launchY y-coordinate of starting point
+     * @param targetX x-coordinate of ending point
+     * @param targetY y-coordinate of ending point
+     * @return A graph for A* to use
+     */
     public AstarNode[][] buildGraphForAstar(int launchX, int launchY, int targetX, int targetY) {
         AstarNode[][] astarGraph = new AstarNode[map.length][map[0].length];
         for (int i = 0; i < map.length; i++) {

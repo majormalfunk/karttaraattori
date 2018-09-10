@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.ui;
 
 import javafx.event.ActionEvent;
@@ -35,10 +34,11 @@ public class MazeScene extends Scene {
     private double paneHeight;
 
     /**
-     * Constructor method
-     *
-     * @param root
-     * @param mzomtic
+     * Constructor for the Maze Scene
+     * @param root the root node
+     * @param mzomtic reference to the application
+     * @param mazeWidth width of the maze
+     * @param mazeHeight height of the maze
      */
     public MazeScene(Parent root, Mazeomatic mzomtic, int mazeWidth, int mazeHeight) {
         super(root, (Math.min(mazeWidth, 100)* BLOCK_SIZE) + 150, (Math.min(mazeHeight, 60)* BLOCK_SIZE) + 150);
@@ -84,15 +84,14 @@ public class MazeScene extends Scene {
 
         // Walls
         addBlocks(mzomtic);
-        overlayEdgesForTesting(mzomtic);
+        overlayEdgesOnScreen(mzomtic);
 
     }
 
     /**
      * Adds maze blocks to the maze scene
      *
-     * @param width
-     * @param height
+     * @param mzomtic A reference to application as an injection
      */
     public void addBlocks(Mazeomatic mzomtic) {
         int[][] map = mzomtic.maze.map;
@@ -122,6 +121,12 @@ public class MazeScene extends Scene {
         }
     }
 
+    /**
+     * Adds blocks to the Pane on stage
+     * @param block Block to be added
+     * @param layoutX x coordinate
+     * @param layoutY y coordinate
+     */
     private void addBlock(MazeBlock block, double layoutX, double layoutY) {
         block.setLayoutX(layoutX);
         block.setLayoutY(layoutY);
@@ -129,9 +134,10 @@ public class MazeScene extends Scene {
     }
 
     /**
-     * This is just for testing purposes. Remove from final.
+     * This overlays the Prims edges on the screen
+     * @param mzomtic A reference to the application
      */
-    private void overlayEdgesForTesting(Mazeomatic mzomtic) {
+    private void overlayEdgesOnScreen(Mazeomatic mzomtic) {
 
         int width = mzomtic.maze.map.length;
         int height = mzomtic.maze.map[0].length;

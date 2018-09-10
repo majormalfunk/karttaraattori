@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.ui;
 
 import javafx.event.ActionEvent;
@@ -34,7 +33,8 @@ public class StartScene extends Scene {
     /**
      * Constructor
      *
-     * @param root
+     * @param root parent root of the scene to be constructed
+     * @param mzmtic reference to the application
      */
     public StartScene(Parent root, Mazeomatic mzmtic) {
         super(root);
@@ -163,7 +163,7 @@ public class StartScene extends Scene {
      * This tries to make an int of the text input
      * 
      * @param input
-     * @return
+     * @return an int if the text was a valid number
      * @throws Exception 
      */
     int parseInput(TextField input) throws Exception {

@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.structures;
 
 
@@ -33,7 +32,7 @@ public class MazeArrayList<T> {
     /**
      * Adds an item to the list
      * 
-     * @param item
+     * @param item item to be added
      * @return true as the item was added
      */
     public boolean add(T item) {
@@ -50,8 +49,8 @@ public class MazeArrayList<T> {
     /**
      * Adds an item at a certain index
      * 
-     * @param index
-     * @param item 
+     * @param index index at which point to add the item
+     * @param item item to be added
      */
     public void add(int index, T item) {
         if (index < 0 || index >= this.counter) {
@@ -80,7 +79,7 @@ public class MazeArrayList<T> {
     /**
      * Checks if an item exists in the list
      * 
-     * @param item
+     * @param item the item which is tried to find on the list
      * @return True if it exists, false otherwise
      */
     public boolean contains(T item) {
@@ -90,7 +89,7 @@ public class MazeArrayList<T> {
     /**
      * Returns the index of the item
      * 
-     * @param item
+     * @param item the item whose index we want to know
      * @return the index
      */
     public int indexOf(T item) {
@@ -107,7 +106,7 @@ public class MazeArrayList<T> {
     /**
      * Shifts the items in the array left from the given index
      * 
-     * @param fromIndex 
+     * @param fromIndex starting index
      */
     private void moveLeft(int fromIndex) {
         for (int i = fromIndex; i < this.counter - 1; i++) {
@@ -117,7 +116,7 @@ public class MazeArrayList<T> {
     
     /**
      * Shifts the items in the array right from the given index
-     * @param fromIndex 
+     * @param fromIndex starting index
      */
     private void moveRight(int fromIndex) {
         for (int i = this.counter - 1; i >= fromIndex; i--) {
@@ -127,7 +126,7 @@ public class MazeArrayList<T> {
 
     /**
      * Removes an item from the array at an index
-     * @param index
+     * @param index the index from which we want to remove an item
      * @return The removed item
      */
     public T remove(int index) {
@@ -142,7 +141,7 @@ public class MazeArrayList<T> {
     
     /**
      * Removes a given item from the array if it was there
-     * @param item
+     * @param item the item we want to remove
      * @return true if it was removed
      */
     public boolean remove(T item) {
@@ -157,8 +156,8 @@ public class MazeArrayList<T> {
     
     /**
      * Returns an item at the given index
-     * @param index
-     * @return 
+     * @param index the index from which we want the item
+     * @return the item in the given index
      */
     public T get(int index) {
         if (index < 0 || index >= this.counter) {
@@ -169,7 +168,7 @@ public class MazeArrayList<T> {
     
     /**
      * Returns the number of items in the list.
-     * @return 
+     * @return the number of items in the list
      */
     public int size() {
         return this.counter;

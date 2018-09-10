@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic.structures;
 
 /**
@@ -31,7 +30,7 @@ public class MazeHashSet<T> {
      * determines how long a list of searched nodes between the nodes grows.
      *
      *
-     * @param initialCapacity 
+     * @param initialCapacity the initial capacity of this set
      */
     public MazeHashSet(int initialCapacity) {
 
@@ -44,7 +43,7 @@ public class MazeHashSet<T> {
     /**
      * Add an item to the list
      * 
-     * @param item
+     * @param item the item to be added
      * @return true if the item was not already in the set. False otherwise.
      */
     public boolean add(T item) {
@@ -69,7 +68,7 @@ public class MazeHashSet<T> {
     /**
      * Checks to see if an item already exists in the set.
      * 
-     * @param item
+     * @param item the item to be checked if contains
      * @return True if it exists, false otherwise
      */
     public boolean contains(T item) {
@@ -88,7 +87,7 @@ public class MazeHashSet<T> {
     
     /**
      * Removes an item from this set.
-     * @param item
+     * @param item the item to be removed
      * @return True if item existed in this set.
      */
     public boolean remove(T item) {
@@ -126,7 +125,7 @@ public class MazeHashSet<T> {
      * This calculates the hashvalue from the item's hash code. THe hashvalue
      * determines to which list the item is placed in.
      *
-     * @param item
+     * @param item the hash value for the item
      * @return the hash value as an int
      */
     private int hashValue(T item) {

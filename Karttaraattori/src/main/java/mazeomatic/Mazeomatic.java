@@ -1,3 +1,7 @@
+/*
+* Jaakko Vilenius 2018
+*/
+
 package mazeomatic;
 
 import javafx.animation.AnimationTimer;
@@ -29,6 +33,13 @@ public class Mazeomatic extends Application {
     public static final int MIN_ROOMS = 2;
     public static final double BLOCK_SIZE = 10;
 
+
+    /**
+     * Starts the JavaFX application
+     * 
+     * @param stage The stage
+     * @throws Exception Could throw any exception if something goes wrong
+     */
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -89,6 +100,9 @@ public class Mazeomatic extends Application {
 
     }
     
+    /**
+     * This resets the parameters so we can build a new map
+     */
     public void resetParameters() {
         mazeWidth = 0;
         mazeHeight = 0;
@@ -97,6 +111,9 @@ public class Mazeomatic extends Application {
         redo = true;
     }
     
+    /**
+     * This does the Start Scene all over again
+     */
     private void showStartScene() {
         redo = false;
         StartScene startScene = new StartScene(root, this);
